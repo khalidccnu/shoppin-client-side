@@ -11,7 +11,11 @@ const Nav = () => {
   };
 
   const handleCollapseHbMenu = ({ target: elem }) => {
-    if (!collapseHbMenu.current.contains(elem)) setHbMenu(true);
+    innerWidth < 640
+      ? !collapseHbMenu.current.contains(elem)
+        ? setHbMenu(true)
+        : null
+      : null;
   };
 
   useEffect(() => {
@@ -27,7 +31,7 @@ const Nav = () => {
   }, []);
 
   return (
-    <nav className="py-3" ref={collapseHbMenu}>
+    <nav className="sticky top-0 bg-white py-3 z-30" ref={collapseHbMenu}>
       <div className="container">
         <div className="flex justify-between">
           <h3 className="font-bold text-lg">Shoppin</h3>
@@ -43,7 +47,7 @@ const Nav = () => {
               )}
             </span>
             <ul
-              className={`absolute sm:static top-8 right-0 flex flex-col sm:flex-row bg-amber-50/40 sm:bg-transparent w-[calc(100vw_-_2rem)] sm:w-auto p-3 sm:p-0 rounded-lg shadow-sm sm:shadow-none overflow-hidden sm:space-x-2 space-y-2 sm:space-y-0 ${
+              className={`absolute sm:static top-8 right-0 flex flex-col sm:flex-row bg-blue-100/70 sm:bg-transparent backdrop-blur sm:backdrop-blur-none w-[calc(100vw_-_2rem)] sm:w-auto p-3 sm:p-0 rounded-lg shadow-sm sm:shadow-none overflow-hidden sm:space-x-2 space-y-2 sm:space-y-0 ${
                 hbMenu ? "max-h-0 opacity-0" : "max-h-96 opacity-100"
               } transition-[max-height,_opacity] duration-500`}
             >

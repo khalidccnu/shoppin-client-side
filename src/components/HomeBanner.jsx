@@ -1,13 +1,17 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import { IKContext, IKImage } from "imagekitio-react";
+import imgDecHolder from "../assets/decorative-holder.png";
 
 const HomeBanner = () => {
   const navigate = useNavigate();
 
   return (
     <IKContext urlEndpoint="https://ik.imagekit.io/khalidccnu">
-      <section className="bg-sky-50">
+      <section className="relative bg-sky-50">
+        <div className="absolute top-0 left-16 hidden xl:block max-w-[7rem]">
+          <img src={imgDecHolder} alt="" className="w-full" />
+        </div>
         <div className="container">
           <div className="flex flex-col-reverse sm:flex-row justify-between items-center max-w-4xl mx-auto py-8">
             <div className="sm:mr-5 space-y-3">
