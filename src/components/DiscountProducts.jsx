@@ -1,7 +1,6 @@
 import React from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { EffectCoverflow, Autoplay } from "swiper";
-import "swiper/css/effect-coverflow";
 import Product from "./Product.jsx";
 
 const DiscountProducts = ({ discount }) => {
@@ -19,8 +18,10 @@ const DiscountProducts = ({ discount }) => {
           breakpoints={{
             640: {
               slidesPerView: 3,
+              spaceBetween: 25,
             },
             768: {
+              slidesPerView: 3,
               spaceBetween: 50,
             },
           }}
