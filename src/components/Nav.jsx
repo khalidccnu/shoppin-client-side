@@ -31,7 +31,7 @@ const Nav = () => {
   }, []);
 
   return (
-    <nav className="sticky top-0 bg-white py-3 z-30" ref={collapseHbMenu}>
+    <nav className="sticky top-0 bg-gray-50 py-3 z-30" ref={collapseHbMenu}>
       <div className="container">
         <div className="flex justify-between">
           <h3 className="font-bold text-lg">Shoppin</h3>
