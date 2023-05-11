@@ -1,36 +1,31 @@
 import React from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
-import { Pagination, Autoplay } from "swiper";
-import "swiper/css";
-import "swiper/css/pagination";
-import "swiper/css/autoplay";
+import { EffectCoverflow, Autoplay } from "swiper";
+import "swiper/css/effect-coverflow";
 import Product from "./Product.jsx";
 
-const FeaturedProducts = ({ featured }) => {
+const DiscountProducts = ({ discount }) => {
   return (
     <section className="py-10 text-center">
       <div className="container">
-        <h3 className="font-bold text-2xl mb-10">Featured Products</h3>
+        <h3 className="font-bold text-2xl mb-10">Discount Products</h3>
         <Swiper
-          className="pb-14"
-          modules={[Pagination, Autoplay]}
-          pagination={{ clickable: true }}
+          className="max-w-4xl mx-auto"
+          modules={[EffectCoverflow, Autoplay]}
+          effect="coverflow"
           autoplay={{ pauseOnMouseEnter: true, disableOnInteraction: false }}
           slidesPerView="1"
-          spaceBetween="50"
+          spaceBetween="25"
           breakpoints={{
             640: {
-              slidesPerView: 2,
-            },
-            768: {
               slidesPerView: 3,
             },
-            1024: {
-              slidesPerView: 4,
+            768: {
+              spaceBetween: 50,
             },
           }}
         >
-          {featured.map((product) => (
+          {discount.map((product) => (
             <SwiperSlide
               key={product["_id"]}
               className="group card card-compact bg-sky-50 hover:bg-sky-200/60 h-auto transition-[background-color] duration-500"
@@ -44,4 +39,4 @@ const FeaturedProducts = ({ featured }) => {
   );
 };
 
-export default FeaturedProducts;
+export default DiscountProducts;

@@ -4,9 +4,10 @@ import HomeBanner from "../components/HomeBanner.jsx";
 import FeaturedProducts from "../components/FeaturedProducts.jsx";
 import WhatShoppinOffers from "../components/WhatShoppinOffers.jsx";
 import TrendingProduct from "../components/TrendingProduct.jsx";
+import DiscountProducts from "../components/DiscountProducts.jsx";
 
 const Home = () => {
-  const featured = useLoaderData();
+  const [featured, discount] = useLoaderData();
 
   return (
     <>
@@ -14,6 +15,7 @@ const Home = () => {
       <FeaturedProducts featured={featured} />
       <WhatShoppinOffers />
       <TrendingProduct />
+      <DiscountProducts discount={discount} />
     </>
   );
 };

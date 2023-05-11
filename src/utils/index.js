@@ -1,7 +1,13 @@
 export const filterProducts = async (_) => {
-  return await fetch(`https://shoppin.vercel.app/products/featured`).then(
-    (response) => response.json()
-  );
+  const featured = await fetch(
+    `https://shoppin.vercel.app/products/featured`
+  ).then((response) => response.json());
+
+  const discount = await fetch(
+    `https://shoppin.vercel.app/products/discount`
+  ).then((response) => response.json());
+
+  return [featured, discount];
 };
 
 export const getCart = (_) => {

@@ -16,7 +16,7 @@ import {
   removeWishlist,
 } from "../utils/index.js";
 
-const FeaturedProduct = ({ product }) => {
+const Product = ({ product }) => {
   const [isWishlist, setWishlist] = useState(false);
   const [isCart, setCart] = useState(false);
   const navigate = useNavigate();
@@ -111,4 +111,4 @@ const FeaturedProduct = ({ product }) => {
   );
 };
 
-export default FeaturedProduct;
+export default Product;
