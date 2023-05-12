@@ -7,7 +7,11 @@ const HomeLoader = async (_) => {
     `https://shoppin.webie.link/products/discount`
   ).then((response) => response.json());
 
-  return [featured, discount];
+  const categories = await fetch(`https://shoppin.webie.link/categories`).then(
+    (response) => response.json()
+  );
+
+  return [featured, discount, categories];
 };
 
 export default HomeLoader;

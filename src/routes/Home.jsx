@@ -5,9 +5,10 @@ import FeaturedProducts from "../components/FeaturedProducts.jsx";
 import WhatShoppinOffers from "../components/WhatShoppinOffers.jsx";
 import TrendingProduct from "../components/TrendingProduct.jsx";
 import DiscountProducts from "../components/DiscountProducts.jsx";
+import Categories from "../components/Categories.jsx";
 
 const Home = () => {
-  const [featured, discount] = useLoaderData();
+  const [featured, discount, categories] = useLoaderData();
 
   return (
     <>
@@ -16,6 +17,7 @@ const Home = () => {
       <WhatShoppinOffers />
       <TrendingProduct />
       <DiscountProducts discount={discount} />
+      <Categories categories={categories} />
     </>
   );
 };
