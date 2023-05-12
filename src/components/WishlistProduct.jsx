@@ -13,7 +13,7 @@ import {
   removeWishlist,
 } from "../utils/index.js";
 
-const WishlistProduct = ({ isRemoveWishlist, setRemoveWishlist, product }) => {
+const WishlistProduct = ({ removeProduct, setRemoveProduct, product }) => {
   const [isCart, setCart] = useState(false);
   const navigate = useNavigate();
   const { _id: id, name, price, category, seller, img } = product;
@@ -33,7 +33,7 @@ const WishlistProduct = ({ isRemoveWishlist, setRemoveWishlist, product }) => {
   const handleRemoveWishlist = (id, name) => {
     removeWishlist(id);
     toast.warn(name + " has been removed from wishlist.");
-    setRemoveWishlist(!isRemoveWishlist);
+    setRemoveProduct(id);
   };
 
   useEffect((_) => {

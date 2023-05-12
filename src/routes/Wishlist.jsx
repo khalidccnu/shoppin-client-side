@@ -1,33 +1,22 @@
 import React, { useEffect, useState } from "react";
-import { getWishlist } from "../utils/index.js";
+import { useLoaderData } from "react-router-dom";
 import WishlistProduct from "../components/WishlistProduct.jsx";
 
 const Wishlist = () => {
-  const [wishlist, setWishlist] = useState([]);
-  const [isRemoveWishlist, setRemoveWishlist] = useState(false);
-
-  const handleWishlist = async (_) => {
-    const wl = [];
-    const wishlistProducts = getWishlist();
-    const products = await fetch(`https://shoppin.webie.link/products`).then(
-      (response) => response.json()
-    );
-
-    wishlistProducts.forEach((productId) => {
-      const wishlistProduct = products.find(
-        (product) => product["_id"] === productId
-      );
-      wl.push(wishlistProduct);
-    });
-
-    return wl;
-  };
+  const wishlistLoader = useLoaderData();
+  const [wishlist, setWishlist] = useState(wishlistLoader);
+  const [removeProduct, setRemoveProduct] = useState("");
 
   useEffect(
     (_) => {
-      handleWishlist().then((response) => setWishlist(response));
+      if (removeProduct) {
+        const restWishlistProducts = wishlist.filter(
+          (product) => product["_id"] !== removeProduct
+        );
+        setWishlist(restWishlistProducts);
+      }
     },
-    [isRemoveWishlist]
+    [removeProduct]
   );
 
   return (
@@ -38,8 +27,8 @@ const Wishlist = () => {
             {wishlist.map((product) => (
               <WishlistProduct
                 key={product["_id"]}
-                isRemoveWishlist={isRemoveWishlist}
-                setRemoveWishlist={setRemoveWishlist}
+                removeProduct={removeProduct}
+                setRemoveProduct={setRemoveProduct}
                 product={product}
               />
             ))}
