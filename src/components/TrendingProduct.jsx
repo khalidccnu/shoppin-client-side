@@ -14,7 +14,7 @@ const TrendingProduct = () => {
   };
 
   useEffect((_) => {
-    fetch(`https://shoppin.vercel.app/products/6457669a9493bacbef325fcb`)
+    fetch(`https://shoppin.webie.link/products/6457669a9493bacbef325fcb`)
       .then((response) => response.json())
       .then((result) => setTrending(result));
   }, []);

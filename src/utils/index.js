@@ -1,10 +1,10 @@
 export const filterProducts = async (_) => {
   const featured = await fetch(
-    `https://shoppin.vercel.app/products/featured`
+    `https://shoppin.webie.link/products/featured`
   ).then((response) => response.json());
 
   const discount = await fetch(
-    `https://shoppin.vercel.app/products/discount`
+    `https://shoppin.webie.link/products/discount`
   ).then((response) => response.json());
 
   return [featured, discount];

@@ -9,7 +9,7 @@ const Wishlist = () => {
   const handleWishlist = async (_) => {
     const wl = [];
     const wishlistProducts = getWishlist();
-    const products = await fetch(`https://shoppin.vercel.app/products`).then(
+    const products = await fetch(`https://shoppin.webie.link/products`).then(
       (response) => response.json()
     );
 
