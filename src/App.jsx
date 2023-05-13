@@ -1,10 +1,12 @@
 import React from "react";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import HomeLoader from "./loaders/HomeLoader.js";
+import ShopLoader from "./loaders/ShopLoader.jsx";
 import WishlistLoader from "./loaders/WishlistLoader.js";
 import AppStatus from "./components/AppStatus.jsx";
 import Root from "./routes/Root.jsx";
 import Home from "./routes/Home.jsx";
+import Shop from "./routes/Shop.jsx";
 import Wishlist from "./routes/Wishlist.jsx";
 
 const App = () => {
@@ -21,6 +23,11 @@ const App = () => {
           path: "/",
           element: <Home />,
           loader: HomeLoader,
+        },
+        {
+          path: "/shop",
+          element: <Shop />,
+          loader: ShopLoader,
         },
         {
           path: "/wishlist",
