@@ -7,6 +7,7 @@ import AppStatus from "./components/AppStatus.jsx";
 import Root from "./routes/Root.jsx";
 import Home from "./routes/Home.jsx";
 import Shop from "./routes/Shop.jsx";
+import Contact from "./routes/Contact.jsx";
 import Wishlist from "./routes/Wishlist.jsx";
 
 const App = () => {
@@ -28,6 +29,10 @@ const App = () => {
           path: "/shop",
           element: <Shop />,
           loader: ShopLoader,
+        },
+        {
+          path: "/contact",
+          element: <Contact />,
         },
         {
           path: "/wishlist",
