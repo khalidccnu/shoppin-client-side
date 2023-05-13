@@ -14,7 +14,7 @@ const TrendingProduct = () => {
   };
 
   useEffect((_) => {
-    fetch(`https://shoppin.webie.link/products/6457669a9493bacbef325fcb`)
+    fetch(`https://shoppin.webie.link/products?id=645fa4e1d7d23fb56bb3b662`)
       .then((response) => response.json())
       .then((result) => setTrending(result));
   }, []);

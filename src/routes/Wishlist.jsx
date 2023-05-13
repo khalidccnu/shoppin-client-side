@@ -27,7 +27,6 @@ const Wishlist = () => {
             {wishlist.map((product) => (
               <WishlistProduct
                 key={product["_id"]}
-                removeProduct={removeProduct}
                 setRemoveProduct={setRemoveProduct}
                 product={product}
               />

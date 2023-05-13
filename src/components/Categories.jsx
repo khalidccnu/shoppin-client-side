@@ -1,25 +1,8 @@
 import React from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import Category from "./Category.jsx";
-import imgMenSneaker from "../assets/men-sneaker.jpg";
-import imgMenPant from "../assets/men-pant.jpg";
-import imgMenBoot from "../assets/men-boot.jpg";
-import imgBag from "../assets/bag.jpg";
-import imgCap from "../assets/cap.jpg";
-import imgEarphone from "../assets/earphone.jpg";
-import imgBottle from "../assets/bottle.jpg";
 
 const Categories = ({ categories }) => {
-  const categoriesImg = [
-    imgMenSneaker,
-    imgMenPant,
-    imgMenBoot,
-    imgBag,
-    imgCap,
-    imgEarphone,
-    imgBottle,
-  ];
-
   return (
     <section className="py-10 text-center">
       <div className="container">
@@ -37,12 +20,9 @@ const Categories = ({ categories }) => {
             },
           }}
         >
-          {categories.map((categoryName, idx) => (
-            <SwiperSlide key={idx} className="group">
-              <Category
-                key={idx}
-                category={{ name: categoryName, img: categoriesImg[idx] }}
-              />
+          {categories.map((category) => (
+            <SwiperSlide key={category["_id"]} className="group">
+              <Category key={category["_id"]} category={category} />
             </SwiperSlide>
           ))}
         </Swiper>

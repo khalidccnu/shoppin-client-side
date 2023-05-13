@@ -1,7 +1,7 @@
 import React from "react";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import HomeLoader from "./loaders/HomeLoader.js";
-import ShopLoader from "./loaders/ShopLoader.jsx";
+import ShopLoader from "./loaders/ShopLoader.js";
 import WishlistLoader from "./loaders/WishlistLoader.js";
 import ViewProductLoader from "./loaders/ViewProductLoader.js";
 import AppStatus from "./components/AppStatus.jsx";

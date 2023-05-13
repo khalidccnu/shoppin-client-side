@@ -20,7 +20,8 @@ const ShopView = ({ isGridView, product }) => {
   const [isWishlist, setWishlist] = useState(false);
   const [isCart, setCart] = useState(false);
   const navigate = useNavigate();
-  const { _id: id, name, price, category, seller, img, discount } = product;
+  const { _id: id, category_id, name, price, seller, img, discount } = product;
+  const [category, setCategory] = useState("");
   const [discountPrice, setDiscountPrice] = useState(null);
 
   const handleAddCart = (id, name) => {
@@ -56,6 +57,12 @@ const ShopView = ({ isGridView, product }) => {
     getWishlist().find((productId) => productId === id)
       ? setWishlist(true)
       : null;
+  }, []);
+
+  useEffect((_) => {
+    fetch(`https://shoppin.webie.link/categories?id=${category_id}`)
+      .then((response) => response.json())
+      .then((result) => setCategory(result.name));
   }, []);
 
   return (
@@ -112,7 +119,7 @@ const ShopView = ({ isGridView, product }) => {
             <button
               type="button"
               className="btn btn-sm px-5 bg-[#35bef0] border-none rounded normal-case"
-              onClick={(_) => navigate("/shop/" + id)}
+              onClick={(_) => navigate("/shop/view-product/" + id)}
             >
               View Details
             </button>
@@ -147,7 +154,7 @@ const ShopView = ({ isGridView, product }) => {
               <button
                 type="button"
                 className="btn btn-sm px-5 bg-[#35bef0] border-none rounded normal-case"
-                onClick={(_) => navigate("/shop/" + id)}
+                onClick={(_) => navigate("/shop/view-product/" + id)}
               >
                 View Details
               </button>

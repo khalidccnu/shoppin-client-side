@@ -12,7 +12,8 @@ const Nav = () => {
 
   const handleCollapseHbMenu = ({ target: elem }) => {
     innerWidth < 640
-      ? !collapseHbMenu.current.contains(elem)
+      ? !collapseHbMenu.current.contains(elem) ||
+        elem.classList.contains("nav-link")
         ? setHbMenu(true)
         : null
       : null;
@@ -46,42 +47,47 @@ const Nav = () => {
                 <FaTimesCircle className="h-6" />
               )}
             </span>
-            <ul
-              className={`absolute sm:static top-8 right-0 flex flex-col sm:flex-row bg-blue-100/70 sm:bg-transparent backdrop-blur sm:backdrop-blur-none w-[calc(100vw_-_2rem)] sm:w-auto p-3 sm:p-0 rounded-lg shadow-sm sm:shadow-none overflow-hidden sm:space-x-2 space-y-2 sm:space-y-0 ${
+            <div
+              className={`absolute sm:static top-8 right-0 bg-blue-100/70 sm:bg-transparent backdrop-blur sm:backdrop-blur-none w-[calc(100vw_-_2rem)] sm:w-auto rounded-lg shadow-sm sm:shadow-none ${
                 hbMenu ? "max-h-0 opacity-0" : "max-h-96 opacity-100"
-              } transition-[max-height,_opacity] duration-500`}
+              } overflow-hidden transition-[max-height,_opacity] duration-500`}
             >
-              <li>
-                <NavLink
-                  to="/"
-                  className={({ isActive }) =>
-                    "hover:text-purple-600" + (isActive ? " text-pink-600" : "")
-                  }
-                >
-                  Home
-                </NavLink>
-              </li>
-              <li>
-                <NavLink
-                  to="/shop"
-                  className={({ isActive }) =>
-                    "hover:text-purple-600" + (isActive ? " text-pink-600" : "")
-                  }
-                >
-                  Shop
-                </NavLink>
-              </li>
-              <li>
-                <NavLink
-                  to="/contact"
-                  className={({ isActive }) =>
-                    "hover:text-purple-600" + (isActive ? " text-pink-600" : "")
-                  }
-                >
-                  Contact
-                </NavLink>
-              </li>
-            </ul>
+              <ul className="flex flex-col sm:flex-row p-3 sm:p-0 sm:space-x-2 space-y-2 sm:space-y-0">
+                <li>
+                  <NavLink
+                    to="/"
+                    className={({ isActive }) =>
+                      "nav-link block hover:text-purple-600" +
+                      (isActive ? " text-pink-600" : "")
+                    }
+                  >
+                    Home
+                  </NavLink>
+                </li>
+                <li>
+                  <NavLink
+                    to="/shop"
+                    className={({ isActive }) =>
+                      "nav-link block hover:text-purple-600" +
+                      (isActive ? " text-pink-600" : "")
+                    }
+                  >
+                    Shop
+                  </NavLink>
+                </li>
+                <li>
+                  <NavLink
+                    to="/contact"
+                    className={({ isActive }) =>
+                      "nav-link block hover:text-purple-600" +
+                      (isActive ? " text-pink-600" : "")
+                    }
+                  >
+                    Contact
+                  </NavLink>
+                </li>
+              </ul>
+            </div>
           </div>
         </div>
       </div>
