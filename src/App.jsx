@@ -10,6 +10,7 @@ import Home from "./routes/Home.jsx";
 import Shop from "./routes/Shop.jsx";
 import Contact from "./routes/Contact.jsx";
 import Login from "./routes/Login.jsx";
+import Signup from "./routes/Signup.jsx";
 import Wishlist from "./routes/Wishlist.jsx";
 import ViewProduct from "./routes/ViewProduct.jsx";
 
@@ -40,6 +41,10 @@ const App = () => {
         {
           path: "/login",
           element: <Login />,
+        },
+        {
+          path: "/signup",
+          element: <Signup />,
         },
         {
           path: "/wishlist",
