@@ -9,6 +9,7 @@ import {
   getWishlist,
   removeWishlist,
 } from "../utils/index.js";
+import RelatedProducts from "../components/RelatedProducts.jsx";
 
 const ViewProduct = () => {
   const product = useLoaderData();
@@ -124,6 +125,7 @@ const ViewProduct = () => {
             </div>
           </div>
         </div>
+        <RelatedProducts categoryId={category_id} productId={product["_id"]} />
       </div>
     </section>
   );
