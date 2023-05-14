@@ -35,9 +35,9 @@ const Contact = () => {
         <div className="container">
           <div className="flex flex-col-reverse sm:flex-row sm:justify-between items-center max-w-sm sm:max-w-3xl mx-auto">
             <div className="w-full mt-5 sm:mt-0 sm:mr-5">
-              <h1 className="hidden sm:block text-3xl font-bold text-[#35bef0]">
+              <h3 className="hidden sm:block text-3xl font-bold text-[#35bef0]">
                 Get in Touch
-              </h1>
+              </h3>
               <form
                 className="form-control sm:mt-3 space-y-4"
                 onSubmit={handleContact}

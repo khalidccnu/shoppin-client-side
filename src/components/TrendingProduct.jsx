@@ -38,9 +38,9 @@ const TrendingProduct = () => {
               />
             </div>
             <div className="sm:ml-5 space-y-3">
-              <h1 className="text-3xl font-bold text-[#35bef0]">
+              <h3 className="text-3xl font-bold text-[#35bef0]">
                 Unique & Trending Product
-              </h1>
+              </h3>
               <div className="text-gray-700">
                 <h5>{trending.name}</h5>
                 <span>Price: ${trending.price}</span>
