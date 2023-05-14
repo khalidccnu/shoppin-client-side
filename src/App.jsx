@@ -15,6 +15,7 @@ import Signup from "./routes/Signup.jsx";
 import Wishlist from "./routes/Wishlist.jsx";
 import ViewProduct from "./routes/ViewProduct.jsx";
 import Cart from "./routes/Cart.jsx";
+import Checkout from "./routes/Checkout.jsx";
 
 const App = () => {
   const router = createBrowserRouter([
@@ -61,6 +62,11 @@ const App = () => {
         {
           path: "/cart",
           element: <Cart />,
+          loader: CartLoader,
+        },
+        {
+          path: "/checkout",
+          element: <Checkout />,
           loader: CartLoader,
         },
       ],
