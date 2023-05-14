@@ -23,6 +23,8 @@ export const removeCart = (id, shortCart) => {
   localStorage.setItem("cart", JSON.stringify(cart));
 };
 
+export const clearCart = (_) => localStorage.removeItem("cart");
+
 export const getWishlist = (_) => {
   let wishlist = [];
   const wishlistProducts = localStorage.getItem("wishlist");
@@ -46,4 +48,23 @@ export const removeWishlist = (id) => {
 
   wishlist.splice(wishlist.indexOf(id), 1);
   localStorage.setItem("wishlist", JSON.stringify(wishlist));
+};
+
+export const shoppingCartCalc = (cart) => {
+  const totalPrice = cart.reduce(
+    (total, current) =>
+      total +
+      (current.discount ? Math.round(current.price * 0.5) : current.price) *
+        current.quantity,
+    0
+  );
+
+  const totalShippingCharge = cart.reduce(
+    (total, current) => total + current.shipping * current.quantity,
+    0
+  );
+
+  let grandTotal = totalPrice + totalShippingCharge;
+
+  return { totalPrice, totalShippingCharge, grandTotal };
 };

@@ -1,6 +1,12 @@
 import React from "react";
 import { Link, NavLink } from "react-router-dom";
-import { FaEnvelope, FaHeart, FaPhoneAlt, FaUser } from "react-icons/fa";
+import {
+  FaEnvelope,
+  FaHeart,
+  FaPhoneAlt,
+  FaShoppingCart,
+  FaUser,
+} from "react-icons/fa";
 
 const Header = () => {
   return (
@@ -40,6 +46,14 @@ const Header = () => {
             >
               <span>Wishlist</span>
               <FaHeart />
+            </NavLink>
+            <NavLink
+              to="/cart"
+              className={({ isActive }) =>
+                "px-1" + (isActive ? " border-b border-b-pink-600" : "")
+              }
+            >
+              <FaShoppingCart />
             </NavLink>
           </div>
         </div>

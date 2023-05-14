@@ -4,6 +4,7 @@ import HomeLoader from "./loaders/HomeLoader.js";
 import ShopLoader from "./loaders/ShopLoader.js";
 import WishlistLoader from "./loaders/WishlistLoader.js";
 import ViewProductLoader from "./loaders/ViewProductLoader.js";
+import CartLoader from "./loaders/CartLoader.js";
 import AppStatus from "./components/AppStatus.jsx";
 import Root from "./routes/Root.jsx";
 import Home from "./routes/Home.jsx";
@@ -13,6 +14,7 @@ import Login from "./routes/Login.jsx";
 import Signup from "./routes/Signup.jsx";
 import Wishlist from "./routes/Wishlist.jsx";
 import ViewProduct from "./routes/ViewProduct.jsx";
+import Cart from "./routes/Cart.jsx";
 
 const App = () => {
   const router = createBrowserRouter([
@@ -55,6 +57,11 @@ const App = () => {
           path: "/shop/view-product/:id",
           element: <ViewProduct />,
           loader: ({ params }) => ViewProductLoader(params.id),
+        },
+        {
+          path: "/cart",
+          element: <Cart />,
+          loader: CartLoader,
         },
       ],
     },
