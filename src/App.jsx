@@ -7,6 +7,7 @@ import ViewProductLoader from "./loaders/ViewProductLoader.js";
 import CartLoader from "./loaders/CartLoader.js";
 import AppStatus from "./components/AppStatus.jsx";
 import Root from "./routes/Root.jsx";
+import Error from "./routes/Error.jsx";
 import Home from "./routes/Home.jsx";
 import Shop from "./routes/Shop.jsx";
 import Contact from "./routes/Contact.jsx";
@@ -27,6 +28,7 @@ const App = () => {
           <Root />
         </AppStatus>
       ),
+      errorElement: <Error />,
       children: [
         {
           path: "/",
