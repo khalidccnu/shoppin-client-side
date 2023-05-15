@@ -5,6 +5,7 @@ import ShopLoader from "./loaders/ShopLoader.js";
 import WishlistLoader from "./loaders/WishlistLoader.js";
 import ViewProductLoader from "./loaders/ViewProductLoader.js";
 import CartLoader from "./loaders/CartLoader.js";
+import AuthProvider from "./providers/AuthProvider.jsx";
 import AppStatus from "./components/AppStatus.jsx";
 import Root from "./routes/Root.jsx";
 import Error from "./routes/Error.jsx";
@@ -25,7 +26,9 @@ const App = () => {
       path: "/",
       element: (
         <AppStatus>
-          <Root />
+          <AuthProvider>
+            <Root />
+          </AuthProvider>
         </AppStatus>
       ),
       errorElement: <Error />,

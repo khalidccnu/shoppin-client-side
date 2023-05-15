@@ -1,11 +1,14 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { Link } from "react-router-dom";
+import { AuthContext } from "../providers/AuthProvider.jsx";
 
 const Signup = () => {
+  const { createUserWithEP } = useContext(AuthContext);
   const [input, setInput] = useState({
     email: "",
     password: "",
   });
+  const [success, setSuccess] = useState("");
 
   const changeInput = ({ target }) => {
     const { name, value } = target;
@@ -15,14 +18,20 @@ const Signup = () => {
     });
   };
 
-  const handleSignup = (e) => {
+  const handleSignup = async (e) => {
     e.preventDefault();
     const { email, password } = e.target;
+
+    await createUserWithEP(email.value, password.value).then((_) =>
+      setSuccess("Your account has been created successfully!")
+    );
 
     setInput({
       email: "",
       password: "",
     });
+
+    setTimeout((_) => setSuccess(""), 3000);
   };
 
   return (
@@ -31,6 +40,11 @@ const Signup = () => {
         <div className="artboard phone-2 max-w-full !h-auto mx-auto border rounded p-5">
           <h3 className="font-bold text-2xl text-center">Signup</h3>
           <form className="form-control mt-5 space-y-4" onSubmit={handleSignup}>
+            {success ? (
+              <span className="text-xs font-medium text-[#35bef0]">
+                {success}
+              </span>
+            ) : null}
             <div>
               <label className="label label-text pt-0 px-0">Email</label>
               <input

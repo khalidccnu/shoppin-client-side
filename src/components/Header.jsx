@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Link, NavLink } from "react-router-dom";
 import {
   FaEnvelope,
@@ -7,8 +7,11 @@ import {
   FaShoppingCart,
   FaUser,
 } from "react-icons/fa";
+import { AuthContext } from "../providers/AuthProvider.jsx";
 
 const Header = () => {
+  const { userInfo } = useContext(AuthContext);
+
   return (
     <header className="py-3 bg-purple-600 text-white text-xs">
       <div className="container">
@@ -27,16 +30,18 @@ const Header = () => {
             </Link>
           </div>
           <div className="flex space-x-2">
-            <NavLink
-              to="/login"
-              className={({ isActive }) =>
-                "inline-flex px-1 space-x-0.5" +
-                (isActive ? " border-b border-b-pink-600" : "")
-              }
-            >
-              <span>Login</span>
-              <FaUser />
-            </NavLink>
+            {!userInfo ? (
+              <NavLink
+                to="/login"
+                className={({ isActive }) =>
+                  "inline-flex px-1 space-x-0.5" +
+                  (isActive ? " border-b border-b-pink-600" : "")
+                }
+              >
+                <span>Login</span>
+                <FaUser />
+              </NavLink>
+            ) : null}
             <NavLink
               to="/wishlist"
               className={({ isActive }) =>
