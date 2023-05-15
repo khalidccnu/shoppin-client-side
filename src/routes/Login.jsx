@@ -1,12 +1,15 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { Link } from "react-router-dom";
 import { FaGoogle, FaFacebook } from "react-icons/fa";
+import { AuthContext } from "../providers/AuthProvider.jsx";
 
 const Login = () => {
+  const { signInWithEP } = useContext(AuthContext);
   const [input, setInput] = useState({
     email: "",
     password: "",
   });
+  const [loading, setLoading] = useState(false);
 
   const changeInput = ({ target }) => {
     const { name, value } = target;
@@ -20,10 +23,8 @@ const Login = () => {
     e.preventDefault();
     const { email, password } = e.target;
 
-    setInput({
-      email: "",
-      password: "",
-    });
+    setLoading(true);
+    signInWithEP(email.value, password.value).catch((_) => setLoading(false));
   };
 
   return (
@@ -60,7 +61,13 @@ const Login = () => {
                 type="submit"
                 className="btn btn-sm bg-[#35bef0] border-none rounded normal-case w-full"
               >
-                Login
+                <span>Login</span>
+                {loading ? (
+                  <span
+                    className="inline-block h-4 w-4 border-2 border-current border-r-transparent rounded-full ml-2 animate-spin"
+                    role="status"
+                  ></span>
+                ) : null}
               </button>
             </div>
             <div className="flex flex-col sm:flex-row sm:justify-center sm:space-x-2">

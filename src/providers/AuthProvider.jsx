@@ -1,5 +1,6 @@
 import React, { createContext, useEffect, useState } from "react";
 import {
+  signInWithEmailAndPassword,
   createUserWithEmailAndPassword,
   onAuthStateChanged,
   signOut,
@@ -11,6 +12,9 @@ export const AuthContext = createContext({});
 const AuthProvider = ({ children }) => {
   const [loading, setLoading] = useState(true);
   const [userInfo, setUserInfo] = useState(null);
+
+  const signInWithEP = (email, password) =>
+    signInWithEmailAndPassword(auth, email, password);
 
   const createUserWithEP = (email, password) => {
     return createUserWithEmailAndPassword(auth, email, password).then(
@@ -33,6 +37,7 @@ const AuthProvider = ({ children }) => {
   const authInfo = {
     loading,
     userInfo,
+    signInWithEP,
     createUserWithEP,
     logOut,
   };
@@ -52,12 +57,15 @@ const AuthProvider = ({ children }) => {
           })
             .then((response) => response.text())
             .then((result) => {
-              fetch(`https://shoppin.webie.link/users?id=${userCred.uid}`, {
-                method: "GET",
-                headers: {
-                  authorization: `Bearer ${result}`,
-                },
-              })
+              return fetch(
+                `https://shoppin.webie.link/users?id=${userCred.uid}`,
+                {
+                  method: "GET",
+                  headers: {
+                    authorization: `Bearer ${result}`,
+                  },
+                }
+              )
                 .then((response) => response.json())
                 .then((result) =>
                   setUserInfo({
