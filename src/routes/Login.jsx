@@ -4,7 +4,7 @@ import { FaGoogle, FaFacebook } from "react-icons/fa";
 import { AuthContext } from "../providers/AuthProvider.jsx";
 
 const Login = () => {
-  const { signInWithEP } = useContext(AuthContext);
+  const { signInWithEP, signInWithGoogle } = useContext(AuthContext);
   const [input, setInput] = useState({
     email: "",
     password: "",
@@ -25,6 +25,11 @@ const Login = () => {
 
     setLoading(true);
     signInWithEP(email.value, password.value).catch((_) => setLoading(false));
+  };
+
+  const handleLoginWithGoogle = (_) => {
+    setLoading(true);
+    signInWithGoogle().catch((_) => setLoading(false));
   };
 
   return (
@@ -77,7 +82,10 @@ const Login = () => {
               </Link>
             </div>
             <div className="divider">or</div>
-            <div className="flex justify-center items-center p-2 border space-x-2 cursor-pointer">
+            <div
+              className="flex justify-center items-center p-2 border space-x-2 cursor-pointer"
+              onClick={handleLoginWithGoogle}
+            >
               <FaGoogle className="text-2xl" />
               <span>Continue with Google</span>
             </div>
