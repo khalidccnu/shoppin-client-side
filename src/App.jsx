@@ -7,6 +7,8 @@ import ViewProductLoader from "./loaders/ViewProductLoader.js";
 import CartLoader from "./loaders/CartLoader.js";
 import AuthProvider from "./providers/AuthProvider.jsx";
 import AppStatus from "./components/AppStatus.jsx";
+import LogOffRoute from "./components/LogOffRoute.jsx";
+import PrivateRoute from "./components/PrivateRoute.jsx";
 import Root from "./routes/Root.jsx";
 import Error from "./routes/Error.jsx";
 import Home from "./routes/Home.jsx";
@@ -19,6 +21,7 @@ import ViewProduct from "./routes/ViewProduct.jsx";
 import Cart from "./routes/Cart.jsx";
 import Checkout from "./routes/Checkout.jsx";
 import OrderComplete from "./routes/OrderComplete.jsx";
+import Dashboard from "./routes/Dashboard.jsx";
 
 const App = () => {
   const router = createBrowserRouter([
@@ -49,11 +52,19 @@ const App = () => {
         },
         {
           path: "/login",
-          element: <Login />,
+          element: (
+            <LogOffRoute>
+              <Login />
+            </LogOffRoute>
+          ),
         },
         {
           path: "/signup",
-          element: <Signup />,
+          element: (
+            <LogOffRoute>
+              <Signup />
+            </LogOffRoute>
+          ),
         },
         {
           path: "/wishlist",
@@ -78,6 +89,14 @@ const App = () => {
         {
           path: "/order-complete",
           element: <OrderComplete />,
+        },
+        {
+          path: "/dashboard",
+          element: (
+            <PrivateRoute>
+              <Dashboard />
+            </PrivateRoute>
+          ),
         },
       ],
     },

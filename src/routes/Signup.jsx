@@ -1,9 +1,10 @@
 import React, { useContext, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { AuthContext } from "../providers/AuthProvider.jsx";
 
 const Signup = () => {
   const { createUserWithEP } = useContext(AuthContext);
+  const navigate = useNavigate();
   const [input, setInput] = useState({
     email: "",
     password: "",
@@ -18,20 +19,17 @@ const Signup = () => {
     });
   };
 
-  const handleSignup = async (e) => {
+  const handleSignup = (e) => {
     e.preventDefault();
     const { email, password } = e.target;
 
-    await createUserWithEP(email.value, password.value).then((_) =>
-      setSuccess("Your account has been created successfully!")
-    );
-
-    setInput({
-      email: "",
-      password: "",
-    });
-
-    setTimeout((_) => setSuccess(""), 3000);
+    createUserWithEP(email.value, password.value)
+      .then((_) =>
+        setSuccess(
+          "Your account has been created successfully! You are being redirected, please wait..."
+        )
+      )
+      .then((_) => setTimeout((_) => navigate("/dashboard"), 3000));
   };
 
   return (

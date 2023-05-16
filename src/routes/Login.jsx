@@ -1,15 +1,19 @@
-import React, { useContext, useState } from "react";
-import { Link } from "react-router-dom";
+import React, { useContext, useEffect, useState } from "react";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { FaGoogle, FaFacebook } from "react-icons/fa";
 import { AuthContext } from "../providers/AuthProvider.jsx";
 
 const Login = () => {
   const { signInWithEP, signInWithGoogle } = useContext(AuthContext);
+  const navigate = useNavigate();
+  const location = useLocation();
   const [input, setInput] = useState({
     email: "",
     password: "",
   });
   const [loading, setLoading] = useState(false);
+  const [status, setStatus] = useState("");
+  const fromURL = location.state?.fromURL.pathname;
 
   const changeInput = ({ target }) => {
     const { name, value } = target;
@@ -24,13 +28,24 @@ const Login = () => {
     const { email, password } = e.target;
 
     setLoading(true);
-    signInWithEP(email.value, password.value).catch((_) => setLoading(false));
+    signInWithEP(email.value, password.value)
+      .then((_) => navigate(fromURL || "/dashboard"))
+      .catch((_) => setLoading(false));
   };
 
   const handleLoginWithGoogle = (_) => {
     setLoading(true);
-    signInWithGoogle().catch((_) => setLoading(false));
+    signInWithGoogle()
+      .then((_) => navigate(fromURL || "/dashboard"))
+      .catch((_) => setLoading(false));
   };
+
+  useEffect((_) => {
+    if (fromURL)
+      setStatus(
+        "Only registered user can access this page. Please, login first!"
+      );
+  }, []);
 
   return (
     <section className="py-10">
@@ -41,6 +56,11 @@ const Login = () => {
             className="form-control mt-5 space-y-4"
             onSubmit={handleLoginWithEP}
           >
+            {status ? (
+              <span className="text-xs font-medium text-[#35bef0]">
+                {status}
+              </span>
+            ) : null}
             <div>
               <label className="label label-text pt-0 px-0">Email</label>
               <input
