@@ -10,7 +10,7 @@ import {
 import { AuthContext } from "../providers/AuthProvider.jsx";
 
 const Header = () => {
-  const { userInfo } = useContext(AuthContext);
+  const { loading, userInfo } = useContext(AuthContext);
 
   return (
     <header className="py-3 bg-purple-600 text-white text-xs">
@@ -30,7 +30,7 @@ const Header = () => {
             </Link>
           </div>
           <div className="flex space-x-2">
-            {!userInfo ? (
+            {!loading && !userInfo ? (
               <NavLink
                 to="/login"
                 className={({ isActive }) =>

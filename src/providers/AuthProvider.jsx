@@ -1,4 +1,5 @@
 import React, { createContext, useEffect, useState } from "react";
+import { useCookies } from "react-cookie";
 import {
   signInWithEmailAndPassword,
   signInWithPopup,
@@ -13,6 +14,7 @@ export const AuthContext = createContext({});
 const AuthProvider = ({ children }) => {
   const [loading, setLoading] = useState(true);
   const [userInfo, setUserInfo] = useState(null);
+  const [cookies, setCookie, removeCookie] = useCookies(["_at"]);
 
   const createAccessToken = (userId) => {
     return fetch("https://shoppin.webie.link/jwt", {
@@ -21,7 +23,17 @@ const AuthProvider = ({ children }) => {
         "content-type": "application/json",
       },
       body: JSON.stringify(userId),
-    }).then((response) => response.text());
+    })
+      .then((response) => response.text())
+      .then((token) => {
+        setCookie("_at", token, {
+          sameSite: "none",
+          secure: true,
+          maxAge: 21600,
+        });
+
+        return token;
+      });
   };
 
   const createUser = (userId) => {
@@ -43,10 +55,17 @@ const AuthProvider = ({ children }) => {
     }).then((response) => response.json());
   };
 
-  const signInWithEP = (email, password) =>
-    signInWithEmailAndPassword(auth, email, password);
+  const signInWithEP = (email, password) => {
+    setLoading(true);
+
+    return signInWithEmailAndPassword(auth, email, password).then((userCred) =>
+      createAccessToken({ id: userCred.user.uid })
+    );
+  };
 
   const signInWithGoogle = (_) => {
+    setLoading(true);
+
     return signInWithPopup(auth, googleProvider).then((userCred) =>
       createAccessToken({ id: userCred.user.uid }).then((token) =>
         getUserInfo(userCred.user.uid, token).then((result) =>
@@ -58,13 +77,22 @@ const AuthProvider = ({ children }) => {
 
   const createUserWithEP = (email, password) =>
     createUserWithEmailAndPassword(auth, email, password).then((userCred) =>
-      createUser(userCred.user.uid)
+      createUser(userCred.user.uid).then((_) =>
+        createAccessToken({ id: userCred.user.uid })
+      )
     );
 
-  const logOut = (_) => signOut(auth);
+  const logOut = (_) =>
+    signOut(auth).then((_) =>
+      removeCookie("_at", {
+        sameSite: "none",
+        secure: true,
+      })
+    );
 
   const authInfo = {
     loading,
+    setLoading,
     userInfo,
     signInWithEP,
     signInWithGoogle,
@@ -74,32 +102,28 @@ const AuthProvider = ({ children }) => {
 
   useEffect(() => {
     const authChange = onAuthStateChanged(auth, (userCred) => {
-      (async (_) => {
-        if (userCred) {
-          const userId = { id: userCred.uid };
+      if (userCred && cookies._at) {
+        getUserInfo(userCred.uid, cookies._at).then((result) => {
+          setUserInfo({
+            ...userCred,
+            isAdmin: result.isAdmin,
+          });
 
-          await createAccessToken(userId).then((token) =>
-            getUserInfo(userCred.uid, token).then((result) =>
-              setUserInfo({
-                ...userCred,
-                isAdmin: result.isAdmin,
-              })
-            )
-          );
-        } else {
-          setUserInfo(null);
-        }
+          setLoading(false);
+        });
+      } else {
+        setUserInfo(null);
+      }
 
-        setLoading(false);
-      })();
+      if (!userCred) setLoading(false);
     });
 
     return () => authChange();
-  }, []);
+  }, [cookies._at]);
 
-  return !loading ? (
+  return (
     <AuthContext.Provider value={authInfo}>{children}</AuthContext.Provider>
-  ) : null;
+  );
 };
 
 export default AuthProvider;

@@ -5,7 +5,7 @@ const Dashboard = () => {
   const { userInfo } = useContext(AuthContext);
 
   useEffect((_) => {
-    sessionStorage.setItem("valid-user", JSON.stringify(true));
+    sessionStorage.setItem("_vu", JSON.stringify(true));
   }, []);
 
   return (

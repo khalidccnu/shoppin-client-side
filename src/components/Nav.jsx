@@ -4,7 +4,7 @@ import { FaBars, FaTimesCircle, FaUser } from "react-icons/fa";
 import { AuthContext } from "../providers/AuthProvider.jsx";
 
 const Nav = () => {
-  const { userInfo, logOut } = useContext(AuthContext);
+  const { loading, userInfo, logOut } = useContext(AuthContext);
   const navigate = useNavigate();
   const [hbMenu, setHbMenu] = useState(true);
   const collapseHbMenu = useRef();
@@ -24,7 +24,7 @@ const Nav = () => {
 
   const handleLogout = (_) =>
     logOut()
-      .then((_) => sessionStorage.removeItem("valid-user"))
+      .then((_) => sessionStorage.removeItem("_vu"))
       .then((_) => navigate("/login"));
 
   useEffect(() => {
@@ -96,7 +96,7 @@ const Nav = () => {
                 </li>
               </ul>
             </div>
-            {userInfo ? (
+            {!loading && userInfo ? (
               <div className="dropdown dropdown-end ml-3">
                 <label tabIndex={0} className="btn btn-ghost btn-circle avatar">
                   <div className="w-10 border-2 border-dotted rounded-full">

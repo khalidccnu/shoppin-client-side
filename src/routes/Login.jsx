@@ -4,14 +4,14 @@ import { FaGoogle, FaFacebook } from "react-icons/fa";
 import { AuthContext } from "../providers/AuthProvider.jsx";
 
 const Login = () => {
-  const { signInWithEP, signInWithGoogle } = useContext(AuthContext);
+  const { loading, setLoading, signInWithEP, signInWithGoogle } =
+    useContext(AuthContext);
   const navigate = useNavigate();
   const location = useLocation();
   const [input, setInput] = useState({
     email: "",
     password: "",
   });
-  const [loading, setLoading] = useState(false);
   const [status, setStatus] = useState("");
   const fromURL = location.state?.fromURL.pathname;
 
@@ -27,14 +27,12 @@ const Login = () => {
     e.preventDefault();
     const { email, password } = e.target;
 
-    setLoading(true);
     signInWithEP(email.value, password.value)
       .then((_) => navigate(fromURL || "/dashboard"))
       .catch((_) => setLoading(false));
   };
 
   const handleLoginWithGoogle = (_) => {
-    setLoading(true);
     signInWithGoogle()
       .then((_) => navigate(fromURL || "/dashboard"))
       .catch((_) => setLoading(false));
