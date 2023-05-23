@@ -1,11 +1,16 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useLoaderData } from "react-router-dom";
 import { FaThLarge, FaList } from "react-icons/fa";
 import ShopView from "../components/ShopView.jsx";
+import Pagination from "../components/Pagination.jsx";
 
 const Shop = () => {
-  const [getGridView, products] = useLoaderData();
+  const [getGridView, { totalProducts }] = useLoaderData();
   const [isGridView, setGridView] = useState(getGridView);
+  const [currentProducts, setCurrentProducts] = useState([]);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [productsPerPage] = useState(8);
+  const [pageCount] = useState(Math.ceil(totalProducts / productsPerPage));
 
   const handleGridView = (_) => {
     localStorage.setItem("shopView", JSON.stringify("grid"));
@@ -16,6 +21,17 @@ const Shop = () => {
     localStorage.setItem("shopView", JSON.stringify("list"));
     setGridView(false);
   };
+
+  useEffect(
+    (_) => {
+      fetch(
+        `https://shoppin.webie.link/products?page=${currentPage}&limit=${productsPerPage}`
+      )
+        .then((response) => response.json())
+        .then((result) => setCurrentProducts(result));
+    },
+    [currentPage]
+  );
 
   return (
     <section className="py-10">
@@ -53,7 +69,7 @@ const Shop = () => {
               : "sm:max-w-2xl"
           } mx-auto`}
         >
-          {products.map((product) => (
+          {currentProducts.map((product) => (
             <ShopView
               key={product["_id"]}
               isGridView={isGridView}
@@ -61,6 +77,7 @@ const Shop = () => {
             />
           ))}
         </div>
+        <Pagination setCurrentPage={setCurrentPage} pageCount={pageCount} />
       </div>
     </section>
   );

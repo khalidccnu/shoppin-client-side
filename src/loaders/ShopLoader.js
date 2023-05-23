@@ -4,11 +4,11 @@ const ShopLoader = async (_) => {
 
   if (shopView) JSON.parse(shopView) !== "grid" ? (isGridView = false) : null;
 
-  const products = await fetch(`https://shoppin.webie.link/products`).then(
-    (response) => response.json()
-  );
+  const totalProducts = await fetch(
+    `https://shoppin.webie.link/products?count=true`
+  ).then((response) => response.json());
 
-  return [isGridView, products];
+  return [isGridView, totalProducts];
 };
 
 export default ShopLoader;
