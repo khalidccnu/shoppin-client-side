@@ -1,20 +1,15 @@
 import { getWishlist } from "../utils/index.js";
 
 const WishlistLoader = async (_) => {
-  const wishlist = [];
-  const wishlistProducts = getWishlist();
-  const products = await fetch(`https://shoppin.webie.link/products`).then(
-    (response) => response.json()
-  );
+  const wishlist = getWishlist();
 
-  wishlistProducts.forEach((productId) => {
-    const wishlistProduct = products.find(
-      (product) => product["_id"] === productId
-    );
-    wishlist.push(wishlistProduct);
-  });
-
-  return wishlist;
+  return await fetch(`https://shoppin.webie.link/products?ids=true`, {
+    method: "POST",
+    headers: {
+      "content-type": "application/json",
+    },
+    body: JSON.stringify(wishlist),
+  }).then((response) => response.json());
 };
 
 export default WishlistLoader;

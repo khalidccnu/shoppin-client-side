@@ -3,9 +3,15 @@ import { getCart } from "../utils/index.js";
 const CartLoader = async (_) => {
   const cart = [];
   const cartProducts = getCart();
-  const products = await fetch(`https://shoppin.webie.link/products`).then(
-    (response) => response.json()
-  );
+  const cartProductsId = Object.keys(cartProducts);
+
+  const products = await fetch(`https://shoppin.webie.link/products?ids=true`, {
+    method: "POST",
+    headers: {
+      "content-type": "application/json",
+    },
+    body: JSON.stringify(cartProductsId),
+  }).then((response) => response.json());
 
   for (let productId in cartProducts) {
     const cartProduct = products.find(
