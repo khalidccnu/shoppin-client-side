@@ -22,6 +22,7 @@ import Cart from "./routes/Cart.jsx";
 import Checkout from "./routes/Checkout.jsx";
 import OrderComplete from "./routes/OrderComplete.jsx";
 import Dashboard from "./routes/Dashboard.jsx";
+import Settings from "./routes/Settings.jsx";
 
 const App = () => {
   const router = createBrowserRouter([
@@ -95,6 +96,14 @@ const App = () => {
           element: (
             <PrivateRoute>
               <Dashboard />
+            </PrivateRoute>
+          ),
+        },
+        {
+          path: "/settings",
+          element: (
+            <PrivateRoute>
+              <Settings />
             </PrivateRoute>
           ),
         },

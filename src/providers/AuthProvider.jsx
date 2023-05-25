@@ -5,6 +5,7 @@ import {
   signInWithPopup,
   createUserWithEmailAndPassword,
   onAuthStateChanged,
+  updateProfile,
   signOut,
 } from "firebase/auth";
 import { auth, googleProvider } from "../utils/firebase.config.js";
@@ -82,6 +83,35 @@ const AuthProvider = ({ children }) => {
       )
     );
 
+  const updateUser = async (
+    id,
+    name,
+    password,
+    address,
+    state,
+    city,
+    postal
+  ) => {
+    name
+      ? await updateProfile(auth.currentUser, {
+          displayName: name,
+        })
+      : null;
+
+    return fetch(`https://shoppin.webie.link/users?id=${id}`, {
+      method: "PATCH",
+      headers: {
+        "content-type": "application/json",
+      },
+      body: JSON.stringify({
+        street: address,
+        state,
+        city,
+        postal,
+      }),
+    });
+  };
+
   const logOut = (_) =>
     signOut(auth).then((_) =>
       removeCookie("_at", {
@@ -97,6 +127,7 @@ const AuthProvider = ({ children }) => {
     signInWithEP,
     signInWithGoogle,
     createUserWithEP,
+    updateUser,
     logOut,
   };
 
@@ -106,7 +137,7 @@ const AuthProvider = ({ children }) => {
         getUserInfo(userCred.uid, cookies._at).then((result) => {
           setUserInfo({
             ...userCred,
-            isAdmin: result.isAdmin,
+            ...result,
           });
 
           setLoading(false);
