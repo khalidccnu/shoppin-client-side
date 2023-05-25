@@ -39,7 +39,7 @@ const Login = () => {
   };
 
   useEffect((_) => {
-    if (fromURL)
+    if (fromURL && !fromURL.includes("checkout"))
       setStatus(
         "Only registered user can access this page. Please, login first!"
       );

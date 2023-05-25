@@ -1,9 +1,22 @@
-import React, { useState } from "react";
-import { Link, Navigate, useLoaderData, useNavigate } from "react-router-dom";
-import { clearCart } from "../utils/index.js";
+import React, { useContext, useEffect, useState } from "react";
+import {
+  Link,
+  Navigate,
+  useLoaderData,
+  useLocation,
+  useNavigate,
+} from "react-router-dom";
+import { clearCart, shoppingCartCalc } from "../utils/index.js";
+import { AuthContext } from "../providers/AuthProvider.jsx";
 
 const Checkout = () => {
   const cart = useLoaderData();
+  const [cartCalc, setCartCalc] = useState({
+    totalPrice: 0,
+    totalShippingCharge: 0,
+    grandTotal: 0,
+  });
+  const { loading, userInfo } = useContext(AuthContext);
   const [input, setInput] = useState({
     email: "",
     name: "",
@@ -13,6 +26,7 @@ const Checkout = () => {
     postal: "",
   });
   const navigate = useNavigate();
+  const location = useLocation();
 
   const changeInput = ({ target }) => {
     const { name, value } = target;
@@ -26,9 +40,61 @@ const Checkout = () => {
     e.preventDefault();
     const { email, name, address, state, city, postal } = e.target;
 
-    clearCart();
-    navigate("/order-complete");
+    const products = cart.map((product) => {
+      return {
+        _id: product._id,
+        price: product.discount
+          ? Math.round(product.price * 0.5)
+          : product.price,
+        quantity: product.quantity,
+      };
+    });
+
+    fetch(`https://shoppin.webie.link/orders`, {
+      method: "POST",
+      headers: {
+        "content-type": "application/json",
+      },
+      body: JSON.stringify({
+        products,
+        totalPrice: cartCalc.totalPrice,
+        totalShippingCharge: cartCalc.totalShippingCharge,
+        grandTotal: cartCalc.grandTotal,
+        ct_key: userInfo?.uid || email.value,
+        ct_name: name.value,
+        ct_street: address.value,
+        ct_state: state.value,
+        ct_city: city.value,
+        ct_postal: parseInt(postal.value),
+      }),
+    }).then((_) => {
+      clearCart();
+      navigate("/order-complete", { state: { fromURL: location } });
+    });
   };
+
+  useEffect((_) => {
+    const calc = shoppingCartCalc(cart);
+    setCartCalc({ ...calc });
+  }, []);
+
+  useEffect(
+    (_) => {
+      if (userInfo) {
+        const { email, displayName, street, state, city, postal } = userInfo;
+
+        setInput({
+          email,
+          name: displayName,
+          address: street,
+          state,
+          city,
+          postal,
+        });
+      }
+    },
+    [userInfo]
+  );
 
   return cart.length ? (
     <section className="py-10">
@@ -40,12 +106,20 @@ const Checkout = () => {
           <div className="space-y-3">
             <div className="flex flex-col sm:flex-row sm:justify-between">
               <h3 className="font-semibold">Contact Information</h3>
-              <div className="space-x-2">
-                <span className="text-gray-500">Already have an account?</span>
-                <Link to="/login" className="text-[#35bef0]">
-                  Login
-                </Link>
-              </div>
+              {!loading && !userInfo ? (
+                <div className="space-x-2">
+                  <span className="text-gray-500">
+                    Already have an account?
+                  </span>
+                  <Link
+                    to="/login"
+                    state={{ fromURL: location }}
+                    className="text-[#35bef0]"
+                  >
+                    Login
+                  </Link>
+                </div>
+              ) : null}
             </div>
             <input
               type="email"

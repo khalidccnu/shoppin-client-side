@@ -1,13 +1,15 @@
 import React from "react";
-import { useNavigate } from "react-router-dom";
+import { Navigate, useLocation, useNavigate } from "react-router-dom";
 import imgClock from "../assets/clock.png";
 import imgChecklist from "../assets/checklist.png";
 import imgComplete from "../assets/complete.png";
 
 const OrderComplete = () => {
   const navigate = useNavigate();
+  const location = useLocation();
+  const fromURL = location.state?.fromURL.pathname;
 
-  return (
+  return fromURL ? (
     <section className="py-10 text-center">
       <div className="container">
         <div className="max-w-lg mx-auto p-6">
@@ -42,6 +44,8 @@ const OrderComplete = () => {
         </div>
       </div>
     </section>
+  ) : (
+    <Navigate to="/checkout" />
   );
 };
 
