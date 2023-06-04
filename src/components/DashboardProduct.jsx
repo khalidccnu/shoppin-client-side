@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import Swal from "sweetalert2";
 import { FaArrowCircleRight, FaEdit, FaTrash } from "react-icons/fa";
 
-const DashboardProduct = ({ product }) => {
+const DashboardProduct = ({ action, setAction, product }) => {
   const navigate = useNavigate();
   const {
     _id: id,
@@ -16,6 +17,32 @@ const DashboardProduct = ({ product }) => {
   } = product;
   const [category, setCategory] = useState("");
   const [discountPrice, setDiscountPrice] = useState(null);
+
+  const handleDeleteProduct = (id, name) => {
+    Swal.fire({
+      title: "Are you sure?",
+      text: name + " will be deleted.",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#35bef0",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, delete it!",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        fetch(`https://shoppin.webie.link/products?id=${id}`, {
+          method: "DELETE",
+        }).then((_) => {
+          Swal.fire({
+            position: "top-end",
+            icon: "success",
+            title: "Deleted!",
+            showConfirmButton: false,
+            timer: 1500,
+          }).then((_) => setAction(!action));
+        });
+      }
+    });
+  };
 
   useEffect((_) => {
     discount ? setDiscountPrice(Math.round(price * 0.5)) : null;
@@ -65,7 +92,10 @@ const DashboardProduct = ({ product }) => {
             className="hover:text-pink-600 cursor-pointer"
             onClick={(_) => navigate("/shop/view-product/" + id)}
           />
-          <FaTrash className="hover:text-pink-600 cursor-pointer" />
+          <FaTrash
+            className="hover:text-pink-600 cursor-pointer"
+            onClick={(_) => handleDeleteProduct(id, name)}
+          />
         </span>
       </td>
     </tr>

@@ -11,6 +11,7 @@ const DashboardProducts = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const [productsPerPage] = useState(20);
   const [pageCount] = useState(Math.ceil(totalProducts / productsPerPage));
+  const [action, setAction] = useState(false);
 
   useEffect(
     (_) => {
@@ -20,7 +21,7 @@ const DashboardProducts = () => {
         .then((response) => response.json())
         .then((result) => setCurrentProducts(result));
     },
-    [currentPage]
+    [currentPage, action]
   );
 
   return (
@@ -49,7 +50,12 @@ const DashboardProducts = () => {
           </thead>
           <tbody>
             {currentProducts.map((product) => (
-              <DashboardProduct key={product["_id"]} product={product} />
+              <DashboardProduct
+                key={product["_id"]}
+                action={action}
+                setAction={setAction}
+                product={product}
+              />
             ))}
           </tbody>
         </table>
