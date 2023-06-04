@@ -25,6 +25,7 @@ import OrderComplete from "./routes/OrderComplete.jsx";
 import Dashboard from "./routes/Dashboard.jsx";
 import DashboardOverview from "./routes/DashboardOverview.jsx";
 import DashboardProducts from "./routes/DashboardProducts.jsx";
+import AddProduct from "./routes/AddProduct.jsx";
 import Settings from "./routes/Settings.jsx";
 
 const App = () => {
@@ -111,6 +112,10 @@ const App = () => {
               path: "/dashboard/products",
               element: <DashboardProducts />,
               loader: ShopLoader,
+            },
+            {
+              path: "/dashboard/products/add",
+              element: <AddProduct />,
             },
           ],
         },
