@@ -58,7 +58,18 @@ const Dashboard = () => {
                       Products
                     </NavLink>
                   </li>
-                ) : null}
+                ) : (
+                  <li>
+                    <NavLink
+                      to="/dashboard/order-history"
+                      className={({ isActive }) =>
+                        isActive ? "text-pink-600" : ""
+                      }
+                    >
+                      Order History
+                    </NavLink>
+                  </li>
+                )}
               </ul>
             </div>
           </div>

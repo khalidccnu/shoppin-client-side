@@ -28,6 +28,7 @@ import DashboardOverview from "./routes/DashboardOverview.jsx";
 import DashboardProducts from "./routes/DashboardProducts.jsx";
 import AddProduct from "./routes/AddProduct.jsx";
 import UpdateProduct from "./routes/UpdateProduct.jsx";
+import DashboardOrderHistory from "./routes/DashboardOrderHistory.jsx";
 import Settings from "./routes/Settings.jsx";
 
 const App = () => {
@@ -135,6 +136,10 @@ const App = () => {
                 </AdminRoute>
               ),
               loader: ({ params }) => ViewProductLoader(params.id),
+            },
+            {
+              path: "/dashboard/order-history",
+              element: <DashboardOrderHistory />,
             },
           ],
         },
