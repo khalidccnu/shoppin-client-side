@@ -26,6 +26,7 @@ import Dashboard from "./routes/Dashboard.jsx";
 import DashboardOverview from "./routes/DashboardOverview.jsx";
 import DashboardProducts from "./routes/DashboardProducts.jsx";
 import AddProduct from "./routes/AddProduct.jsx";
+import UpdateProduct from "./routes/UpdateProduct.jsx";
 import Settings from "./routes/Settings.jsx";
 
 const App = () => {
@@ -116,6 +117,11 @@ const App = () => {
             {
               path: "/dashboard/products/add",
               element: <AddProduct />,
+            },
+            {
+              path: "/dashboard/products/update/:id",
+              element: <UpdateProduct />,
+              loader: ({ params }) => ViewProductLoader(params.id),
             },
           ],
         },

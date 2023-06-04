@@ -57,7 +57,10 @@ const DashboardProduct = ({ product }) => {
       <td>{category}</td>
       <td>
         <span className="inline-flex gap-x-1">
-          <FaEdit className="hover:text-pink-600 cursor-pointer" />
+          <FaEdit
+            className="hover:text-pink-600 cursor-pointer"
+            onClick={(_) => navigate("/dashboard/products/update/" + id)}
+          />
           <FaArrowCircleRight
             className="hover:text-pink-600 cursor-pointer"
             onClick={(_) => navigate("/shop/view-product/" + id)}
