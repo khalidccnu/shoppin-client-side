@@ -5,6 +5,7 @@ import ShopLoader from "./loaders/ShopLoader.js";
 import WishlistLoader from "./loaders/WishlistLoader.js";
 import ViewProductLoader from "./loaders/ViewProductLoader.js";
 import CartLoader from "./loaders/CartLoader.js";
+import DashboardOverviewLoader from "./loaders/DashboardOverviewLoader.js";
 import AuthProvider from "./providers/AuthProvider.jsx";
 import AppStatus from "./components/AppStatus.jsx";
 import LogOffRoute from "./components/LogOffRoute.jsx";
@@ -22,6 +23,7 @@ import Cart from "./routes/Cart.jsx";
 import Checkout from "./routes/Checkout.jsx";
 import OrderComplete from "./routes/OrderComplete.jsx";
 import Dashboard from "./routes/Dashboard.jsx";
+import DashboardOverview from "./routes/DashboardOverview.jsx";
 import Settings from "./routes/Settings.jsx";
 
 const App = () => {
@@ -98,6 +100,13 @@ const App = () => {
               <Dashboard />
             </PrivateRoute>
           ),
+          children: [
+            {
+              path: "/dashboard",
+              element: <DashboardOverview />,
+              loader: DashboardOverviewLoader,
+            },
+          ],
         },
         {
           path: "/settings",
