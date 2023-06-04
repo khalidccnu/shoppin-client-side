@@ -5,7 +5,7 @@ const DashboardOverview = () => {
   const [{ totalProducts }, { totalOrders }] = useLoaderData();
 
   return (
-    <div className="grid grid-cols-2 gap-10 p-5 text-center">
+    <div className="grid grid-cols-2 gap-10 p-4 text-center">
       <div className="card bg-sky-50">
         <div className="card-body">
           <h2 className="card-title justify-center">Products</h2>

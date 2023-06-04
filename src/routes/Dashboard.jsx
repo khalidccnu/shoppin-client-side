@@ -39,12 +39,12 @@ const Dashboard = () => {
               <ul className="menu bg-white w-80 p-4 lg:border-r-2 lg:border-dotted">
                 <li>
                   <NavLink
-                    to="/dashboard"
+                    to="/dashboard/overview"
                     className={({ isActive }) =>
                       isActive ? "text-pink-600" : ""
                     }
                   >
-                    Dashboard
+                    Overview
                   </NavLink>
                 </li>
                 <li>
