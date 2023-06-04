@@ -10,6 +10,7 @@ import AuthProvider from "./providers/AuthProvider.jsx";
 import AppStatus from "./components/AppStatus.jsx";
 import LogOffRoute from "./components/LogOffRoute.jsx";
 import PrivateRoute from "./components/PrivateRoute.jsx";
+import AdminRoute from "./components/AdminRoute.jsx";
 import Root from "./routes/Root.jsx";
 import Error from "./routes/Error.jsx";
 import Home from "./routes/Home.jsx";
@@ -111,16 +112,28 @@ const App = () => {
             },
             {
               path: "/dashboard/products",
-              element: <DashboardProducts />,
+              element: (
+                <AdminRoute>
+                  <DashboardProducts />
+                </AdminRoute>
+              ),
               loader: ShopLoader,
             },
             {
               path: "/dashboard/products/add",
-              element: <AddProduct />,
+              element: (
+                <AdminRoute>
+                  <AddProduct />
+                </AdminRoute>
+              ),
             },
             {
               path: "/dashboard/products/update/:id",
-              element: <UpdateProduct />,
+              element: (
+                <AdminRoute>
+                  <UpdateProduct />
+                </AdminRoute>
+              ),
               loader: ({ params }) => ViewProductLoader(params.id),
             },
           ],

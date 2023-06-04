@@ -47,16 +47,18 @@ const Dashboard = () => {
                     Overview
                   </NavLink>
                 </li>
-                <li>
-                  <NavLink
-                    to="/dashboard/products"
-                    className={({ isActive }) =>
-                      isActive ? "text-pink-600" : ""
-                    }
-                  >
-                    Products
-                  </NavLink>
-                </li>
+                {userInfo.isAdmin ? (
+                  <li>
+                    <NavLink
+                      to="/dashboard/products"
+                      className={({ isActive }) =>
+                        isActive ? "text-pink-600" : ""
+                      }
+                    >
+                      Products
+                    </NavLink>
+                  </li>
+                ) : null}
               </ul>
             </div>
           </div>
