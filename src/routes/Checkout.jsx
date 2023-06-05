@@ -6,6 +6,8 @@ import {
   useLocation,
   useNavigate,
 } from "react-router-dom";
+import { toast } from "react-toastify";
+import { useStripe, useElements, CardElement } from "@stripe/react-stripe-js";
 import { clearCart, shoppingCartCalc } from "../utils/index.js";
 import { AuthContext } from "../providers/AuthProvider.jsx";
 
@@ -27,6 +29,9 @@ const Checkout = () => {
   });
   const navigate = useNavigate();
   const location = useLocation();
+  const stripe = useStripe();
+  const elements = useElements();
+  const [clientSecret, setClientSecret] = useState("");
 
   const changeInput = ({ target }) => {
     const { name, value } = target;
@@ -36,41 +41,81 @@ const Checkout = () => {
     });
   };
 
-  const handleOrder = (e) => {
+  const handleOrder = async (e) => {
     e.preventDefault();
     const { email, name, address, state, city, postal } = e.target;
 
-    const products = cart.map((product) => {
-      return {
-        _id: product._id,
-        price: product.discount
-          ? Math.round(product.price * 0.5)
-          : product.price,
-        quantity: product.quantity,
-      };
-    });
+    if (!stripe || !elements) return null;
 
-    fetch(`https://shoppin.webie.link/orders`, {
-      method: "POST",
-      headers: {
-        "content-type": "application/json",
-      },
-      body: JSON.stringify({
-        products,
-        totalPrice: cartCalc.totalPrice,
-        totalShippingCharge: cartCalc.totalShippingCharge,
-        grandTotal: cartCalc.grandTotal,
-        ct_key: userInfo?.uid || email.value,
-        ct_name: name.value,
-        ct_street: address.value,
-        ct_state: state.value,
-        ct_city: city.value,
-        ct_postal: parseInt(postal.value),
-      }),
-    }).then((_) => {
-      clearCart();
-      navigate("/order-complete", { state: { fromURL: location } });
-    });
+    const card = elements.getElement(CardElement);
+
+    if (card === null) return null;
+
+    const { error: cpmError, paymentMethod } = await stripe.createPaymentMethod(
+      {
+        type: "card",
+        card,
+      }
+    );
+
+    if (cpmError) {
+      toast.error(cpmError.message);
+      return null;
+    }
+
+    const { error: ccpError, paymentIntent } = await stripe.confirmCardPayment(
+      clientSecret,
+      {
+        payment_method: {
+          card: card,
+          billing_details: {
+            name: name.value,
+            email: email.value,
+          },
+        },
+      }
+    );
+
+    if (ccpError) {
+      toast.error(ccpError.message);
+      return null;
+    }
+
+    if (paymentIntent.status === "succeeded") {
+      const products = cart.map((product) => {
+        return {
+          _id: product._id,
+          price: product.discount
+            ? Math.round(product.price * 0.5)
+            : product.price,
+          quantity: product.quantity,
+        };
+      });
+
+      fetch(`https://shoppin.webie.link/orders`, {
+        method: "POST",
+        headers: {
+          "content-type": "application/json",
+        },
+        body: JSON.stringify({
+          trxID: paymentIntent.id,
+          products,
+          totalPrice: cartCalc.totalPrice,
+          totalShippingCharge: cartCalc.totalShippingCharge,
+          grandTotal: cartCalc.grandTotal,
+          ct_key: userInfo?.uid || email.value,
+          ct_name: name.value,
+          ct_street: address.value,
+          ct_state: state.value,
+          ct_city: city.value,
+          ct_postal: parseInt(postal.value),
+          date: new Date(),
+        }),
+      }).then((_) => {
+        clearCart();
+        navigate("/order-complete", { state: { fromURL: location } });
+      });
+    }
   };
 
   useEffect((_) => {
@@ -94,6 +139,25 @@ const Checkout = () => {
       }
     },
     [userInfo]
+  );
+
+  useEffect(
+    (_) => {
+      if (cartCalc.grandTotal > 0) {
+        fetch(`https://shoppin.webie.link/create-payment-intent`, {
+          method: "POST",
+          headers: {
+            "content-type": "application/json",
+          },
+          body: JSON.stringify({
+            grandTotal: cartCalc.grandTotal,
+          }),
+        })
+          .then((response) => response.text())
+          .then((result) => setClientSecret(result));
+      }
+    },
+    [cartCalc.grandTotal]
   );
 
   return cart.length ? (
@@ -184,9 +248,14 @@ const Checkout = () => {
               </div>
             </div>
           </div>
+          <div className="space-y-3">
+            <h3 className="font-semibold">Payment</h3>
+            <CardElement />
+          </div>
           <button
             type="submit"
             className="btn btn-sm bg-[#35bef0] border-none rounded normal-case w-full"
+            disabled={!stripe || !clientSecret}
           >
             Complete Order
           </button>

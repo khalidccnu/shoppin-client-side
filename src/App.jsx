@@ -1,5 +1,7 @@
 import React from "react";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import { loadStripe } from "@stripe/stripe-js";
+import { Elements } from "@stripe/react-stripe-js";
 import HomeLoader from "./loaders/HomeLoader.js";
 import ShopLoader from "./loaders/ShopLoader.js";
 import WishlistLoader from "./loaders/WishlistLoader.js";
@@ -30,6 +32,8 @@ import AddProduct from "./routes/AddProduct.jsx";
 import UpdateProduct from "./routes/UpdateProduct.jsx";
 import DashboardOrderHistory from "./routes/DashboardOrderHistory.jsx";
 import Settings from "./routes/Settings.jsx";
+
+const stripePromise = loadStripe(import.meta.env.VITE_STRIPE_PK);
 
 const App = () => {
   const router = createBrowserRouter([
@@ -155,7 +159,11 @@ const App = () => {
     },
   ]);
 
-  return <RouterProvider router={router} />;
+  return (
+    <Elements stripe={stripePromise}>
+      <RouterProvider router={router} />
+    </Elements>
+  );
 };
 
 export default App;
