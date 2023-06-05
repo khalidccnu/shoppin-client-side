@@ -44,12 +44,22 @@ const Checkout = () => {
   const handleOrder = async (e) => {
     e.preventDefault();
     const { email, name, address, state, city, postal } = e.target;
-
-    if (!stripe || !elements) return null;
-
     const card = elements.getElement(CardElement);
 
-    if (card === null) return null;
+    if (
+      email.value === "" ||
+      name.value === "" ||
+      address.value === "" ||
+      state.value === "" ||
+      city.value === "" ||
+      postal.value === ""
+    ) {
+      toast.warn("All fields are required!");
+      return false;
+    } else if (isNaN(postal.value)) {
+      toast.warn("Postal should be number!");
+      return false;
+    }
 
     const { error: cpmError, paymentMethod } = await stripe.createPaymentMethod(
       {
@@ -238,7 +248,7 @@ const Checkout = () => {
                   className="input input-sm bg-transparent w-full px-0 border-0 border-b border-b-gray-300 rounded-none text-gray-500 input-disabled"
                 />
                 <input
-                  type="number"
+                  type="text"
                   placeholder="Postal Code"
                   name="postal"
                   value={input.postal}
@@ -255,7 +265,7 @@ const Checkout = () => {
           <button
             type="submit"
             className="btn btn-sm bg-[#35bef0] border-none rounded normal-case w-full"
-            disabled={!stripe || !clientSecret}
+            disabled={!stripe || !elements || !clientSecret}
           >
             Complete Order
           </button>

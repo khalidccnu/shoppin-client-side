@@ -27,9 +27,21 @@ const Login = () => {
     e.preventDefault();
     const { email, password } = e.target;
 
+    if (email.value === "" || password.value === "") {
+      setStatus("All fields are required!");
+      return false;
+    }
+
     signInWithEP(email.value, password.value)
       .then((_) => navigate(fromURL || "/dashboard"))
-      .catch((_) => setLoading(false));
+      .catch((err) => {
+        setLoading(false);
+
+        if (err.message === "Firebase: Error (auth/wrong-password).")
+          setStatus("Incorrect password!");
+        else if (err.message === "Firebase: Error (auth/user-not-found).")
+          setStatus("User not found!");
+      });
   };
 
   const handleLoginWithGoogle = (_) => {
