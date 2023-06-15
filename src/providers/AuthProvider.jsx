@@ -18,7 +18,7 @@ const AuthProvider = ({ children }) => {
   const [cookies, setCookie, removeCookie] = useCookies(["_at"]);
 
   const createAccessToken = (userId) => {
-    return fetch("https://shoppin.webie.link/jwt", {
+    return fetch(`${import.meta.env.VITE_API_URL}/jwt`, {
       method: "POST",
       headers: {
         "content-type": "application/json",
@@ -38,7 +38,7 @@ const AuthProvider = ({ children }) => {
   };
 
   const createUser = (userId) => {
-    return fetch(`https://shoppin.webie.link/users`, {
+    return fetch(`${import.meta.env.VITE_API_URL}/users`, {
       method: "POST",
       headers: {
         "content-type": "application/json",
@@ -48,7 +48,7 @@ const AuthProvider = ({ children }) => {
   };
 
   const getUserInfo = (userId, token) => {
-    return fetch(`https://shoppin.webie.link/users?id=${userId}`, {
+    return fetch(`${import.meta.env.VITE_API_URL}/users?id=${userId}`, {
       method: "GET",
       headers: {
         authorization: `Bearer ${token}`,
@@ -98,7 +98,7 @@ const AuthProvider = ({ children }) => {
         })
       : null;
 
-    return fetch(`https://shoppin.webie.link/users?id=${id}`, {
+    return fetch(`${import.meta.env.VITE_API_URL}/users?id=${id}`, {
       method: "PATCH",
       headers: {
         "content-type": "application/json",

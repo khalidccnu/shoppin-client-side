@@ -1,5 +1,5 @@
 const ViewProductLoader = async (id) => {
-  return await fetch(`https://shoppin.webie.link/products?id=${id}`).then(
+  return await fetch(`${import.meta.env.VITE_API_URL}/products?id=${id}`).then(
     (response) => response.json()
   );
 };

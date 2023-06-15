@@ -25,7 +25,9 @@ const Shop = () => {
   useEffect(
     (_) => {
       fetch(
-        `https://shoppin.webie.link/products?page=${currentPage}&limit=${productsPerPage}`
+        `${
+          import.meta.env.VITE_API_URL
+        }/products?page=${currentPage}&limit=${productsPerPage}`
       )
         .then((response) => response.json())
         .then((result) => setCurrentProducts(result));

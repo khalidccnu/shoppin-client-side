@@ -5,7 +5,7 @@ const ShopLoader = async (_) => {
   if (shopView) JSON.parse(shopView) !== "grid" ? (isGridView = false) : null;
 
   const totalProducts = await fetch(
-    `https://shoppin.webie.link/products?count=true`
+    `${import.meta.env.VITE_API_URL}/products?count=true`
   ).then((response) => response.json());
 
   return [isGridView, totalProducts];

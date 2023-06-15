@@ -1,10 +1,10 @@
 const DashboardOverviewLoader = async (_) => {
   const totalProducts = await fetch(
-    `https://shoppin.webie.link/products?count=true`
+    `${import.meta.env.VITE_API_URL}/products?count=true`
   ).then((response) => response.json());
 
   const totalOrders = await fetch(
-    `https://shoppin.webie.link/orders?count=true`
+    `${import.meta.env.VITE_API_URL}/orders?count=true`
   ).then((response) => response.json());
 
   return [totalProducts, totalOrders];

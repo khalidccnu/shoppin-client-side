@@ -71,7 +71,7 @@ const UpdateProduct = () => {
       return false;
     }
 
-    fetch(`https://shoppin.webie.link/products?id=${id}`, {
+    fetch(`${import.meta.env.VITE_API_URL}/products?id=${id}`, {
       method: "PUT",
       headers: {
         "content-type": "application/json",
@@ -93,7 +93,7 @@ const UpdateProduct = () => {
   };
 
   useEffect((_) => {
-    fetch(`https://shoppin.webie.link/categories`)
+    fetch(`${import.meta.env.VITE_API_URL}/categories`)
       .then((response) => response.json())
       .then((result) => setCategories(result));
   }, []);

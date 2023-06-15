@@ -11,7 +11,9 @@ const DashboardOrderHistory = () => {
   const pageCount = Math.ceil(totalOrders / ordersPerPage);
 
   useEffect((_) => {
-    fetch(`https://shoppin.webie.link/orders?count=true&id=${userInfo.uid}`)
+    fetch(
+      `${import.meta.env.VITE_API_URL}/orders?count=true&id=${userInfo.uid}`
+    )
       .then((response) => response.json())
       .then((result) => setTotalOrders(result.totalOrders));
   }, []);
@@ -19,7 +21,9 @@ const DashboardOrderHistory = () => {
   useEffect(
     (_) => {
       fetch(
-        `https://shoppin.webie.link/orders?id=${userInfo.uid}&page=${currentPage}&limit=${ordersPerPage}`
+        `${import.meta.env.VITE_API_URL}/orders?id=${
+          userInfo.uid
+        }&page=${currentPage}&limit=${ordersPerPage}`
       )
         .then((response) => response.json())
         .then((result) => setCurrentOrders(result));

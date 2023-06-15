@@ -5,13 +5,16 @@ const CartLoader = async (_) => {
   const cartProducts = getCart();
   const cartProductsId = Object.keys(cartProducts);
 
-  const products = await fetch(`https://shoppin.webie.link/products?ids=true`, {
-    method: "POST",
-    headers: {
-      "content-type": "application/json",
-    },
-    body: JSON.stringify(cartProductsId),
-  }).then((response) => response.json());
+  const products = await fetch(
+    `${import.meta.env.VITE_API_URL}/products?ids=true`,
+    {
+      method: "POST",
+      headers: {
+        "content-type": "application/json",
+      },
+      body: JSON.stringify(cartProductsId),
+    }
+  ).then((response) => response.json());
 
   for (let productId in cartProducts) {
     const cartProduct = products.find(

@@ -29,7 +29,7 @@ const DashboardProduct = ({ action, setAction, product }) => {
       confirmButtonText: "Yes, delete it!",
     }).then((result) => {
       if (result.isConfirmed) {
-        fetch(`https://shoppin.webie.link/products?id=${id}`, {
+        fetch(`${import.meta.env.VITE_API_URL}/products?id=${id}`, {
           method: "DELETE",
         }).then((_) => {
           Swal.fire({
@@ -49,7 +49,7 @@ const DashboardProduct = ({ action, setAction, product }) => {
   }, []);
 
   useEffect((_) => {
-    fetch(`https://shoppin.webie.link/categories?id=${category_id}`)
+    fetch(`${import.meta.env.VITE_API_URL}/categories?id=${category_id}`)
       .then((response) => response.json())
       .then((result) => setCategory(result.name));
   }, []);

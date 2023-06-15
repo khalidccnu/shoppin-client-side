@@ -8,7 +8,9 @@ const DashboardOverview = () => {
   const [orderProducts, setOrderProducts] = useState(0);
 
   useEffect((_) => {
-    fetch(`https://shoppin.webie.link/orders?count=true&id=${userInfo.uid}`)
+    fetch(
+      `${import.meta.env.VITE_API_URL}/orders?count=true&id=${userInfo.uid}`
+    )
       .then((response) => response.json())
       .then((result) => setOrderProducts(result));
   }, []);

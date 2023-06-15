@@ -5,7 +5,7 @@ const RelatedProducts = ({ categoryId, productId }) => {
   const [products, setProducts] = useState([]);
 
   useEffect((_) => {
-    fetch(`https://shoppin.webie.link/products?cid=${categoryId}`)
+    fetch(`${import.meta.env.VITE_API_URL}/products?cid=${categoryId}`)
       .then((response) => response.json())
       .then((result) => {
         const restProducts = result.filter((e) => e["_id"] !== productId);

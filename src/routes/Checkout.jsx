@@ -102,7 +102,7 @@ const Checkout = () => {
         };
       });
 
-      fetch(`https://shoppin.webie.link/orders`, {
+      fetch(`${import.meta.env.VITE_API_URL}/orders`, {
         method: "POST",
         headers: {
           "content-type": "application/json",
@@ -154,7 +154,7 @@ const Checkout = () => {
   useEffect(
     (_) => {
       if (cartCalc.grandTotal > 0) {
-        fetch(`https://shoppin.webie.link/create-payment-intent`, {
+        fetch(`${import.meta.env.VITE_API_URL}/create-payment-intent`, {
           method: "POST",
           headers: {
             "content-type": "application/json",
