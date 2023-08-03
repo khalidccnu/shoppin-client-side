@@ -1,3 +1,21 @@
+export const featuredProducts = (_) => {
+  return fetch(`${import.meta.env.VITE_API_URL}/products/featured`).then(
+    (response) => response.json()
+  );
+};
+
+export const discountProducts = (_) => {
+  return fetch(`${import.meta.env.VITE_API_URL}/products/discount`).then(
+    (response) => response.json()
+  );
+};
+
+export const productCategories = (_) => {
+  return fetch(`${import.meta.env.VITE_API_URL}/categories`).then((response) =>
+    response.json()
+  );
+};
+
 export const getCart = (_) => {
   let cart = {};
   const cartProducts = localStorage.getItem("cart");

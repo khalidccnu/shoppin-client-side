@@ -2,7 +2,6 @@ import React from "react";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import { loadStripe } from "@stripe/stripe-js";
 import { Elements } from "@stripe/react-stripe-js";
-import HomeLoader from "./loaders/HomeLoader.js";
 import ShopLoader from "./loaders/ShopLoader.js";
 import WishlistLoader from "./loaders/WishlistLoader.js";
 import ViewProductLoader from "./loaders/ViewProductLoader.js";
@@ -52,7 +51,6 @@ const App = () => {
         {
           path: "/",
           element: <Home />,
-          loader: HomeLoader,
         },
         {
           path: "/shop",
