@@ -26,7 +26,6 @@ import Cart from "./routes/Cart.jsx";
 import Checkout from "./routes/Checkout.jsx";
 import OrderComplete from "./routes/OrderComplete.jsx";
 import Dashboard from "./routes/Dashboard.jsx";
-import DashboardRoot from "./routes/DashboardRoot.jsx";
 import DashboardOverview from "./routes/DashboardOverview.jsx";
 import DashboardProducts from "./routes/DashboardProducts.jsx";
 import DashboardProductsRoot from "./routes/DashboardProductsRoot.jsx";
@@ -119,10 +118,6 @@ const App = () => {
           children: [
             {
               path: "/dashboard",
-              element: <DashboardRoot />,
-            },
-            {
-              path: "overview",
               element: <DashboardOverview />,
               loader: DashboardOverviewLoader,
             },

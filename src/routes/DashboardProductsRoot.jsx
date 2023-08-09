@@ -27,7 +27,7 @@ const DashboardProductsRoot = () => {
   );
 
   return (
-    <div className="p-4">
+    <div>
       <div className="text-end mb-3">
         <button
           type="button"

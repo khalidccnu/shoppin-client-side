@@ -99,7 +99,7 @@ const UpdateProduct = () => {
   }, []);
 
   return (
-    <div className="p-4">
+    <div>
       <form
         className="form-control grid grid-cols-2 gap-5 max-w-xl mx-auto"
         onSubmit={handleUpdateProduct}
