@@ -63,7 +63,7 @@ const Signup = () => {
                 type="email"
                 name="email"
                 value={input.email}
-                className="input input-sm input-bordered rounded-none w-full"
+                className="input input-sm input-bordered rounded-none w-full focus:outline-0"
                 onChange={changeInput}
               />
             </div>
@@ -73,7 +73,7 @@ const Signup = () => {
                 type="password"
                 name="password"
                 value={input.password}
-                className="input input-sm input-bordered rounded-none w-full"
+                className="input input-sm input-bordered rounded-none w-full focus:outline-0"
                 onChange={changeInput}
               />
             </div>

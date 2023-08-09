@@ -77,7 +77,7 @@ const Login = () => {
                 type="email"
                 name="email"
                 value={input.email}
-                className="input input-sm input-bordered rounded-none w-full"
+                className="input input-sm input-bordered rounded-none w-full focus:outline-0"
                 onChange={changeInput}
               />
             </div>
@@ -87,7 +87,7 @@ const Login = () => {
                 type="password"
                 name="password"
                 value={input.password}
-                className="input input-sm input-bordered rounded-none w-full"
+                className="input input-sm input-bordered rounded-none w-full focus:outline-0"
                 onChange={changeInput}
               />
             </div>

@@ -1,4 +1,4 @@
-const ShopLoader = async (_) => {
+const ProductsLoader = async (_) => {
   let isGridView = true;
   const shopView = localStorage.getItem("shopView");
 
@@ -11,4 +11,4 @@ const ShopLoader = async (_) => {
   return [isGridView, totalProducts];
 };
 
-export default ShopLoader;
+export default ProductsLoader;

@@ -1,11 +1,14 @@
 import React from "react";
-import { useNavigation } from "react-router-dom";
+import { useLocation, useNavigation } from "react-router-dom";
 import { Rings } from "react-loader-spinner";
 
 const Spinner = ({ children }) => {
+  const location = useLocation();
   const { state } = useNavigation();
 
-  return state === "loading" ? (
+  return location.pathname.includes("dashboard") ? (
+    children
+  ) : state === "loading" ? (
     <Rings
       width="50"
       height="50"

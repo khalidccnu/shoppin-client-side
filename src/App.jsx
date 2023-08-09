@@ -2,7 +2,7 @@ import React from "react";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import { loadStripe } from "@stripe/stripe-js";
 import { Elements } from "@stripe/react-stripe-js";
-import ShopLoader from "./loaders/ShopLoader.js";
+import ProductsLoader from "./loaders/ProductsLoader.js";
 import WishlistLoader from "./loaders/WishlistLoader.js";
 import ViewProductLoader from "./loaders/ViewProductLoader.js";
 import CartLoader from "./loaders/CartLoader.js";
@@ -16,11 +16,12 @@ import Root from "./routes/Root.jsx";
 import Error from "./routes/Error.jsx";
 import Home from "./routes/Home.jsx";
 import Shop from "./routes/Shop.jsx";
+import Products from "./routes/Products.jsx";
+import ViewProduct from "./routes/ViewProduct.jsx";
 import Contact from "./routes/Contact.jsx";
 import Login from "./routes/Login.jsx";
 import Signup from "./routes/Signup.jsx";
 import Wishlist from "./routes/Wishlist.jsx";
-import ViewProduct from "./routes/ViewProduct.jsx";
 import Cart from "./routes/Cart.jsx";
 import Checkout from "./routes/Checkout.jsx";
 import OrderComplete from "./routes/OrderComplete.jsx";
@@ -28,6 +29,7 @@ import Dashboard from "./routes/Dashboard.jsx";
 import DashboardRoot from "./routes/DashboardRoot.jsx";
 import DashboardOverview from "./routes/DashboardOverview.jsx";
 import DashboardProducts from "./routes/DashboardProducts.jsx";
+import DashboardProductsRoot from "./routes/DashboardProductsRoot.jsx";
 import AddProduct from "./routes/AddProduct.jsx";
 import UpdateProduct from "./routes/UpdateProduct.jsx";
 import DashboardOrderHistory from "./routes/DashboardOrderHistory.jsx";
@@ -53,16 +55,27 @@ const App = () => {
           element: <Home />,
         },
         {
-          path: "/shop",
+          path: "shop",
           element: <Shop />,
-          loader: ShopLoader,
+          children: [
+            {
+              path: "/shop",
+              element: <Products />,
+              loader: ProductsLoader,
+            },
+            {
+              path: "view-product/:id",
+              element: <ViewProduct />,
+              loader: ({ params }) => ViewProductLoader(params.id),
+            },
+          ],
         },
         {
-          path: "/contact",
+          path: "contact",
           element: <Contact />,
         },
         {
-          path: "/login",
+          path: "login",
           element: (
             <LogOffRoute>
               <Login />
@@ -70,7 +83,7 @@ const App = () => {
           ),
         },
         {
-          path: "/signup",
+          path: "signup",
           element: (
             <LogOffRoute>
               <Signup />
@@ -78,31 +91,26 @@ const App = () => {
           ),
         },
         {
-          path: "/wishlist",
+          path: "wishlist",
           element: <Wishlist />,
           loader: WishlistLoader,
         },
         {
-          path: "/shop/view-product/:id",
-          element: <ViewProduct />,
-          loader: ({ params }) => ViewProductLoader(params.id),
-        },
-        {
-          path: "/cart",
+          path: "cart",
           element: <Cart />,
           loader: CartLoader,
         },
         {
-          path: "/checkout",
+          path: "checkout",
           element: <Checkout />,
           loader: CartLoader,
         },
         {
-          path: "/order-complete",
+          path: "order-complete",
           element: <OrderComplete />,
         },
         {
-          path: "/dashboard",
+          path: "dashboard",
           element: (
             <PrivateRoute>
               <Dashboard />
@@ -114,44 +122,42 @@ const App = () => {
               element: <DashboardRoot />,
             },
             {
-              path: "/dashboard/overview",
+              path: "overview",
               element: <DashboardOverview />,
               loader: DashboardOverviewLoader,
             },
             {
-              path: "/dashboard/products",
+              path: "products",
               element: (
                 <AdminRoute>
                   <DashboardProducts />
                 </AdminRoute>
               ),
-              loader: ShopLoader,
+              children: [
+                {
+                  path: "/dashboard/products",
+                  element: <DashboardProductsRoot />,
+                  loader: ProductsLoader,
+                },
+                {
+                  path: "add",
+                  element: <AddProduct />,
+                },
+                {
+                  path: "update/:id",
+                  element: <UpdateProduct />,
+                  loader: ({ params }) => ViewProductLoader(params.id),
+                },
+              ],
             },
             {
-              path: "/dashboard/products/add",
-              element: (
-                <AdminRoute>
-                  <AddProduct />
-                </AdminRoute>
-              ),
-            },
-            {
-              path: "/dashboard/products/update/:id",
-              element: (
-                <AdminRoute>
-                  <UpdateProduct />
-                </AdminRoute>
-              ),
-              loader: ({ params }) => ViewProductLoader(params.id),
-            },
-            {
-              path: "/dashboard/order-history",
+              path: "order-history",
               element: <DashboardOrderHistory />,
             },
           ],
         },
         {
-          path: "/settings",
+          path: "settings",
           element: (
             <PrivateRoute>
               <Settings />
