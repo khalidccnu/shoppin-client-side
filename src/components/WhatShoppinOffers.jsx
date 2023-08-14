@@ -5,7 +5,7 @@ import imgSupport from "../assets/support.png";
 
 const WhatShoppinOffers = () => {
   return (
-    <section className="py-10 text-center">
+    <section className="py-10 text-center overflow-x-hidden">
       <div className="container">
         <h3 className="font-bold text-2xl mb-10">What Shoppin Offers!</h3>
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-5 max-w-4xl mx-auto">

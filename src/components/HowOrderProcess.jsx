@@ -7,7 +7,7 @@ import imgEnjoyProduct from "../assets/enjoy-product.png";
 
 const HowOrderProcess = () => {
   return (
-    <section className={`py-10 text-center`}>
+    <section className={`py-10 text-center overflow-hidden`}>
       <div className="container">
         <h3 className="font-bold text-2xl mb-10">How Order Process!</h3>
         <div
@@ -17,8 +17,9 @@ const HowOrderProcess = () => {
             src={imgConnectionChain}
             alt=""
             className={`hidden lg:block absolute inset-x-0 top-0 -z-[1]`}
+            data-aos="fade-up"
           />
-          <div>
+          <div data-aos="zoom-out-right">
             <figure className={`max-w-[10rem] mx-auto`}>
               <img src={imgDiscover} alt="" />
             </figure>
@@ -28,7 +29,7 @@ const HowOrderProcess = () => {
               <p>Smart finding make it easy to find.</p>
             </div>
           </div>
-          <div>
+          <div data-aos="zoom-out-up">
             <figure className={`max-w-[10rem] mx-auto`}>
               <img src={imgAddToBag} alt="" />
             </figure>
@@ -38,7 +39,7 @@ const HowOrderProcess = () => {
               <p>Easily select the correct items and add them to the cart.</p>
             </div>
           </div>
-          <div>
+          <div data-aos="zoom-out-down">
             <figure className={`max-w-[10rem] mx-auto`}>
               <img src={imgFastShipping} alt="" />
             </figure>
@@ -48,7 +49,7 @@ const HowOrderProcess = () => {
               <p>The carrier will confirm and ship quickly to you.</p>
             </div>
           </div>
-          <div>
+          <div data-aos="zoom-out-left">
             <figure className={`max-w-[10rem] mx-auto`}>
               <img src={imgEnjoyProduct} alt="" />
             </figure>

@@ -30,9 +30,12 @@ const TrendingProduct = () => {
 
   return (
     <IKContext urlEndpoint="https://ik.imagekit.io/khalidccnu">
-      <section className="bg-sky-50">
+      <section className="bg-sky-50 overflow-y-hidden">
         <div className="container">
-          <div className="flex flex-col sm:flex-row justify-between items-center max-w-4xl mx-auto py-8">
+          <div
+            className="flex flex-col sm:flex-row justify-between items-center max-w-4xl mx-auto py-8"
+            data-aos="fade-up"
+          >
             <div className="max-w-sm mb-8 sm:mb-0">
               <IKImage
                 path="/shoppin/3-stripes-backpack-2.0.png"

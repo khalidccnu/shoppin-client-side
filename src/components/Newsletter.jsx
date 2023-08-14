@@ -5,13 +5,16 @@ const Newsletter = () => {
   const [email, setEmail] = useState("");
 
   return (
-    <section className="bg-sky-50 overflow-y-hidden">
+    <section className="bg-sky-50 overflow-x-hidden">
       <div className="container">
-        <div className="max-w-2xl mx-auto py-16" data-aos="fade-up">
-          <h3 className="font-bold text-2xl mb-3 text-[#35bef0]">
+        <div className="max-w-2xl mx-auto py-16">
+          <h3
+            className="font-bold text-2xl mb-3 text-[#35bef0]"
+            data-aos="fade-right"
+          >
             Our Newsletter
           </h3>
-          <div className={`relative flex`}>
+          <div className={`relative flex`} data-aos="fade-left">
             <span
               className={`absolute left-3 top-1/2 -translate-y-1/2 text-lg`}
             >

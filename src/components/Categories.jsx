@@ -17,7 +17,7 @@ const Categories = () => {
   }, []);
 
   return (
-    <section className="py-10 text-center">
+    <section className="py-10 text-center overflow-y-hidden">
       <div className="container">
         <h3 className="font-bold text-2xl mb-10">Categories</h3>
         {!isLoading ? (
@@ -33,6 +33,7 @@ const Categories = () => {
                 slidesPerView: 3,
               },
             }}
+            data-aos="fade-up"
           >
             {categories.map((category) => (
               <SwiperSlide key={category["_id"]} className="group">
