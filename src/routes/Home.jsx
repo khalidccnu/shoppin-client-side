@@ -5,6 +5,7 @@ import HomeFeatured from "../components/HomeFeatured.jsx";
 import WhatShoppinOffers from "../components/WhatShoppinOffers.jsx";
 import TrendingProduct from "../components/TrendingProduct.jsx";
 import HowOrderProcess from "../components/HowOrderProcess.jsx";
+import Testimonial from "../components/Testimonial.jsx";
 import DiscountProducts from "../components/DiscountProducts.jsx";
 import Categories from "../components/Categories.jsx";
 
@@ -20,6 +21,7 @@ const Home = () => {
       <WhatShoppinOffers />
       <TrendingProduct />
       <HowOrderProcess />
+      <Testimonial />
       <DiscountProducts />
       <Categories />
     </>
