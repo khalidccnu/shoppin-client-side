@@ -18,8 +18,8 @@ const DiscountProducts = () => {
   }, []);
 
   return (
-    <section className="py-10 text-center">
-      <div className="container">
+    <section className="py-16 text-center overflow-x-hidden">
+      <div className="container" data-aos="fade-left">
         <h3 className="font-bold text-2xl mb-10">Discount Products</h3>
         {!isLoading ? (
           <Swiper

@@ -1,11 +1,10 @@
 import React, { useEffect } from "react";
 import AOS from "aos";
 import HomeBanner from "../components/HomeBanner.jsx";
-import FeaturedProducts from "../components/FeaturedProducts.jsx";
-import Newsletter from "../components/Newsletter.jsx";
-import HowOrderProcess from "../components/HowOrderProcess.jsx";
+import HomeFeatured from "../components/HomeFeatured.jsx";
 import WhatShoppinOffers from "../components/WhatShoppinOffers.jsx";
 import TrendingProduct from "../components/TrendingProduct.jsx";
+import HowOrderProcess from "../components/HowOrderProcess.jsx";
 import DiscountProducts from "../components/DiscountProducts.jsx";
 import Categories from "../components/Categories.jsx";
 
@@ -17,11 +16,10 @@ const Home = () => {
   return (
     <>
       <HomeBanner />
-      <FeaturedProducts />
-      <Newsletter />
-      <HowOrderProcess />
+      <HomeFeatured />
       <WhatShoppinOffers />
       <TrendingProduct />
+      <HowOrderProcess />
       <DiscountProducts />
       <Categories />
     </>

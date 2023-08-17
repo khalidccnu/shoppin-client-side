@@ -5,9 +5,11 @@ import imgSupport from "../assets/support.png";
 
 const WhatShoppinOffers = () => {
   return (
-    <section className="py-10 text-center overflow-x-hidden">
+    <section className="relative pt-16 pb-24 text-center overflow-hidden">
       <div className="container">
-        <h3 className="font-bold text-2xl mb-10">What Shoppin Offers!</h3>
+        <h3 className="font-bold text-2xl mb-10" data-aos="fade-up">
+          What Shoppin Offers!
+        </h3>
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-5 max-w-4xl mx-auto">
           <div
             className="card card-compact bg-sky-50 border border-sky-200 shadow-sm"
@@ -43,6 +45,21 @@ const WhatShoppinOffers = () => {
             </div>
           </div>
         </div>
+      </div>
+      <div className="absolute inset-x-0 -bottom-px">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          preserveAspectRatio="none"
+          version="1.1"
+          viewBox="0 0 2560 100"
+          x="0"
+          y="0"
+        >
+          <polygon
+            className="text-sky-50 fill-current"
+            points="2560 0 2560 100 0 100"
+          ></polygon>
+        </svg>
       </div>
     </section>
   );

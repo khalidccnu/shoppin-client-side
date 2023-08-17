@@ -30,10 +30,10 @@ const TrendingProduct = () => {
 
   return (
     <IKContext urlEndpoint="https://ik.imagekit.io/khalidccnu">
-      <section className="bg-sky-50 overflow-y-hidden">
+      <section className="relative bg-sky-50 pt-8 pb-16 overflow-y-hidden">
         <div className="container">
           <div
-            className="flex flex-col sm:flex-row justify-between items-center max-w-4xl mx-auto py-8"
+            className="flex flex-col sm:flex-row justify-between items-center max-w-4xl mx-auto"
             data-aos="fade-up"
           >
             <div className="max-w-sm mb-8 sm:mb-0">
@@ -69,6 +69,21 @@ const TrendingProduct = () => {
               )}
             </div>
           </div>
+        </div>
+        <div className="absolute inset-x-0 -bottom-px">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            preserveAspectRatio="none"
+            version="1.1"
+            viewBox="0 0 2560 100"
+            x="0"
+            y="0"
+          >
+            <polygon
+              className="text-white fill-current"
+              points="2560 0 2560 100 0 100"
+            ></polygon>
+          </svg>
         </div>
       </section>
     </IKContext>
