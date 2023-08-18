@@ -8,11 +8,11 @@ const HomeFeatured = () => {
   return (
     <section className={`pt-10 overflow-x-hidden`}>
       <div className="container">
-        <div
-          className={`grid grid-cols-1 md:grid-cols-2 gap-5`}
-          data-aos="fade-left"
-        >
-          <div className={`flex items-center bg-sky-50 px-8 py-12 rounded-2xl`}>
+        <div className={`grid grid-cols-1 md:grid-cols-2 gap-5`}>
+          <div
+            className={`flex items-center bg-sky-50 px-8 py-12 rounded-2xl`}
+            data-aos="fade-left"
+          >
             <div>
               <h3 className={`font-bold text-3xl`}>
                 Big patterns are back in fashion
@@ -26,7 +26,10 @@ const HomeFeatured = () => {
               <img src={imgCap} alt="" />
             </figure>
           </div>
-          <div className={`flex items-center bg-sky-50 px-8 py-12 rounded-2xl`}>
+          <div
+            className={`flex items-center bg-sky-50 px-8 py-12 rounded-2xl`}
+            data-aos="fade-left"
+          >
             <div>
               <h3 className={`font-bold text-3xl`}>
                 Show your fashion with shoes

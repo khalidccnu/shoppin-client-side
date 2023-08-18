@@ -7,9 +7,11 @@ import imgEnjoyProduct from "../assets/enjoy-product.png";
 
 const HowOrderProcess = () => {
   return (
-    <section className={`pt-8 text-center overflow-x-hidden`}>
-      <div className="container" data-aos="fade-right">
-        <h3 className="font-bold text-2xl mb-10">How Order Process!</h3>
+    <section className={`pt-8 text-center overflow-hidden`}>
+      <div className="container">
+        <h3 className="font-bold text-2xl mb-10" data-aos="fade-up">
+          How Order Process!
+        </h3>
         <div
           className={`relative grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5`}
         >
@@ -17,8 +19,10 @@ const HowOrderProcess = () => {
             src={imgConnectionChain}
             alt=""
             className={`hidden lg:block absolute inset-x-0 top-0 -z-[1]`}
+            data-aos="fade-up"
+            data-aos-delay="1000"
           />
-          <div>
+          <div data-aos="fade-right">
             <figure className={`max-w-[10rem] mx-auto`}>
               <img src={imgDiscover} alt="" />
             </figure>
@@ -28,7 +32,7 @@ const HowOrderProcess = () => {
               <p>Smart finding make it easy to find.</p>
             </div>
           </div>
-          <div>
+          <div data-aos="fade-right">
             <figure className={`max-w-[10rem] mx-auto`}>
               <img src={imgAddToBag} alt="" />
             </figure>
@@ -38,7 +42,7 @@ const HowOrderProcess = () => {
               <p>Easily select the correct items and add them to the cart.</p>
             </div>
           </div>
-          <div>
+          <div data-aos="fade-left">
             <figure className={`max-w-[10rem] mx-auto`}>
               <img src={imgFastShipping} alt="" />
             </figure>
@@ -48,7 +52,7 @@ const HowOrderProcess = () => {
               <p>The carrier will confirm and ship quickly to you.</p>
             </div>
           </div>
-          <div>
+          <div data-aos="fade-left">
             <figure className={`max-w-[10rem] mx-auto`}>
               <img src={imgEnjoyProduct} alt="" />
             </figure>

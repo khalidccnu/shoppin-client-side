@@ -19,7 +19,7 @@ const DiscountProducts = () => {
 
   return (
     <section className="py-16 text-center overflow-x-hidden">
-      <div className="container" data-aos="fade-left">
+      <div className="container" data-aos="fade-left" data-aos-offset="-120">
         <h3 className="font-bold text-2xl mb-10">Discount Products</h3>
         {!isLoading ? (
           <Swiper

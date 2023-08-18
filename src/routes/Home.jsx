@@ -11,7 +11,7 @@ import Categories from "../components/Categories.jsx";
 
 const Home = () => {
   useEffect((_) => {
-    AOS.init({ delay: 150, duration: 3000 });
+    AOS.init({ offset: -40, anchorPlacement: "center-bottom", duration: 3000 });
   }, []);
 
   return (

@@ -32,17 +32,14 @@ const TrendingProduct = () => {
     <IKContext urlEndpoint="https://ik.imagekit.io/khalidccnu">
       <section className="relative bg-sky-50 pt-8 pb-16 overflow-y-hidden">
         <div className="container">
-          <div
-            className="flex flex-col sm:flex-row justify-between items-center max-w-4xl mx-auto"
-            data-aos="fade-up"
-          >
-            <div className="max-w-sm mb-8 sm:mb-0">
+          <div className="flex flex-col sm:flex-row justify-between items-center max-w-4xl mx-auto">
+            <div className="max-w-sm mb-8 sm:mb-0" data-aos="fade-up">
               <IKImage
                 path="/shoppin/3-stripes-backpack-2.0.png"
                 className="w-full object-cover"
               />
             </div>
-            <div className="sm:ml-5 space-y-3">
+            <div className="sm:ml-5 space-y-3" data-aos="fade-up">
               <h3 className="text-3xl font-bold text-[#35bef0]">
                 Unique & Trending Product
               </h3>

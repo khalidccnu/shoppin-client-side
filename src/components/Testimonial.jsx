@@ -8,9 +8,12 @@ import imgKira from "../assets/kira.jpeg";
 const Testimonial = () => {
   return (
     <section className={`pt-16 overflow-y-hidden`}>
-      <div className="container" data-aos="fade-up">
+      <div className="container">
         <div className="grid grid-cols-1 lg:grid-cols-4 gap-5">
-          <div className="lg:col-span-2 bg-sky-50 p-12 rounded-2xl">
+          <div
+            className="lg:col-span-2 bg-sky-50 p-12 rounded-2xl"
+            data-aos="fade-up"
+          >
             <div className="flex items-center space-x-3">
               <img
                 className="w-10 h-10 rounded-full border-2"
@@ -30,7 +33,7 @@ const Testimonial = () => {
               destination for online shopping.
             </p>
           </div>
-          <div className="bg-sky-50 p-12 rounded-2xl">
+          <div className="bg-sky-50 p-12 rounded-2xl" data-aos="fade-up">
             <div className="flex items-center space-x-3">
               <img
                 className="w-10 h-10 rounded-full border-2"
@@ -50,7 +53,10 @@ const Testimonial = () => {
               shopping.
             </p>
           </div>
-          <div className="lg:row-span-2 bg-sky-50 p-12 rounded-2xl">
+          <div
+            className="lg:row-span-2 bg-sky-50 p-12 rounded-2xl"
+            data-aos="fade-up"
+          >
             <div className="flex items-center space-x-3">
               <img
                 className="w-10 h-10 rounded-full border-2"
@@ -72,7 +78,7 @@ const Testimonial = () => {
               seamless online shopping.
             </p>
           </div>
-          <div className="bg-sky-50 p-12 rounded-2xl">
+          <div className="bg-sky-50 p-12 rounded-2xl" data-aos="fade-up">
             <div className="flex items-center space-x-3">
               <img
                 className="w-10 h-10 rounded-full border-2"
@@ -89,7 +95,10 @@ const Testimonial = () => {
               experience!
             </p>
           </div>
-          <div className="lg:col-span-2 bg-sky-50 p-12 rounded-2xl">
+          <div
+            className="lg:col-span-2 bg-sky-50 p-12 rounded-2xl"
+            data-aos="fade-up"
+          >
             <div className="flex items-center space-x-3">
               <img
                 className="w-10 h-10 rounded-full border-2"
