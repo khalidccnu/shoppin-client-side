@@ -15,8 +15,8 @@ const AppStatus = ({ children }) => {
     addEventListener("offline", handleOfflineStatus);
 
     return () => {
-      addEventListener("online", handleOnlineStatus);
-      addEventListener("offline", handleOfflineStatus);
+      removeEventListener("online", handleOnlineStatus);
+      removeEventListener("offline", handleOfflineStatus);
     };
   }, []);
 
